@@ -10,7 +10,8 @@
 
 	const links = [
 		{ href: '/', label: 'Stories' },
-		{ href: '/board', label: 'Board' }
+		{ href: '/board', label: 'Board' },
+		{ href: '/map', label: 'Map' }
 	];
 </script>
 

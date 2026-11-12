@@ -17,6 +17,7 @@ npm run dev     # then open http://localhost:5173
 
 - **Stories** is the table: search, filter, sort, and set priority, value and effort in place.
 - **Board** shows the stories by priority; drag a card to another column to re-prioritize.
+- **Map** places similar stories close together, coloured by their status in a chosen version.
 - Click a title for the full story, where you can edit or delete it.
 
 Filters and sorting are kept in the address bar, so a view can be bookmarked or shared.
@@ -76,7 +77,8 @@ a value. Adding a version there means adding its `status_<version>` column to th
 | `src/lib/config.ts` | Reads and checks `config.yaml` |
 | `src/lib/server/tsv.ts` | Parses and writes the file format |
 | `src/lib/server/store.ts` | Reads the file and adds, changes and deletes stories |
+| `src/lib/server/similarity.ts` | Lays out the map from the wording of the stories |
 | `src/lib/components/` | Shared pieces of the interface |
-| `src/routes/` | The pages: table, board, story, edit, new |
+| `src/routes/` | The pages: table, board, map, story, edit, new |
 
 Built with [SvelteKit](https://svelte.dev/docs/kit).

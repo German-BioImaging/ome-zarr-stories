@@ -1,1 +1,82 @@
-Managing suggested features for OME-Zarr
+# OME-Zarr user stories
+
+A small local app for collecting, reviewing and prioritizing user stories for OME-Zarr.
+
+The stories live in [`user-stories.tsv`](user-stories.tsv), one per line. That file is the only
+copy: the app reads and writes it directly, so every change is a one-line git diff and the file can
+still be edited by hand or through pull requests.
+
+## Run it
+
+Needs Node 22 or newer.
+
+```sh
+npm install     # once
+npm run dev     # then open http://localhost:5173
+```
+
+- **Stories** is the table: search, filter, sort, and set priority, value and effort in place.
+- **Board** shows the stories by priority; drag a card to another column to re-prioritize.
+- Click a title for the full story, where you can edit or delete it.
+
+Filters and sorting are kept in the address bar, so a view can be bookmarked or shared.
+
+Other commands:
+
+| Command | What it does |
+|---|---|
+| `npm test` | Checks that `user-stories.tsv` is valid, and runs the tests of the data layer |
+| `npm run check` | Type-checks the code |
+| `npm run build && npm start` | Runs the built app instead of the development server |
+
+## The data
+
+`user-stories.tsv` is tab-separated with a header row and these columns, in this order:
+
+| Column | Meaning | Allowed values |
+|---|---|---|
+| `id` | Identifier, never reused | `STORY-001`, `STORY-002`, … |
+| `title` | Short name | Required |
+| `statement` | The story itself, ideally "As a…, I want…, so that…" | Required |
+| `user_classes` | Who the story is for | List of the user classes in `config.yaml` |
+| `requested_by` | Who asked for it | List of names or GitHub handles |
+| `moscow` | Priority | `Must`, `Should`, `Could`, `Won't`, or blank |
+| `value` | How much it matters | `1` (low) to `5` (high), or blank |
+| `effort` | How hard it is | `1` (low) to `5` (high), or blank |
+| `status_<version>` | Whether that OME-Zarr version supports it; one column per version in `config.yaml` | One of the statuses in `config.yaml` |
+| `workaround` | How it is, or could be, done today | Free text |
+| `rfcs` | RFCs that address it | List of `RFC-5`, `RFC-7`, … |
+| `related` | Linked stories; a link is stored on one story and shown on both | List of existing story IDs |
+| `origin` | Where the story was posted | One `http(s)` link, or blank |
+| `sources` | Other issues and threads behind it | List of links, each optionally followed by a note |
+| `examples` | Example data or papers | List of links, each optionally followed by a note |
+| `reviewed` | When the story was last reviewed | Date as `2026-11-12`, or blank |
+
+Rules for the file:
+
+- **Lists** separate their items with `; `.
+- **One story per line.** A line break inside a cell is written as `\n`, a tab as `\t` and a
+  backslash as `\\`.
+- **Score** (value ÷ effort) is shown in the app but not stored.
+
+The app refuses to load a file that breaks these rules and lists the offending lines, and
+`npm test` fails on it, so it can be used as a check in CI.
+
+## Changing the vocabularies
+
+[`config.yaml`](config.yaml) holds the lists the stories are checked against: the user classes,
+the statuses, and the OME-Zarr versions that have a status column. Edit that file to add or rename
+a value. Adding a version there means adding its `status_<version>` column to the TSV too.
+
+## How the code is organized
+
+| Path | What is there |
+|---|---|
+| `src/lib/schema.ts` | The definition of a story: columns, labels, validation |
+| `src/lib/config.ts` | Reads and checks `config.yaml` |
+| `src/lib/server/tsv.ts` | Parses and writes the file format |
+| `src/lib/server/store.ts` | Reads the file and adds, changes and deletes stories |
+| `src/lib/components/` | Shared pieces of the interface |
+| `src/routes/` | The pages: table, board, story, edit, new |
+
+Built with [SvelteKit](https://svelte.dev/docs/kit).

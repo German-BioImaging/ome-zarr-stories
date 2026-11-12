@@ -1,0 +1,29 @@
+# Controlled vocabularies for user-stories.tsv.
+# The app and the tests read this file; a story that uses a value not listed here is rejected.
+
+# OME-Zarr versions each story is assessed against. Each one is a `status_<version>` column
+# in the TSV, so adding a version here means adding that column to the file too.
+# Keep the quotes, or YAML reads 0.6 as a number.
+spec_versions: ["0.6", "0.9dev"]
+
+# Allowed values of the status columns. The first one is the default for a new story.
+statuses:
+  - Unassessed
+  - Not possible
+  - Transitional
+  - Standardized
+
+# Who a story is for. A story can list several (or none, until it is triaged).
+user_classes:
+  - name: Bioimage analyst
+    description: Analyses images, e.g. segmentation, tracking, registration, quantification.
+  - name: Data scientist
+    description: Runs machine learning or large-scale analysis across many datasets.
+  - name: Data producer
+    description: Acquires or converts images and shares them, e.g. microscopists and facilities.
+  - name: Data manager
+    description: Curates, hosts or archives data, e.g. data stewards and repository teams.
+  - name: Tool developer
+    description: Builds or maintains viewers, libraries, pipelines or methods that read or write OME-Zarr.
+  - name: Researcher
+    description: Opens and explores images to answer a scientific question, without writing code.

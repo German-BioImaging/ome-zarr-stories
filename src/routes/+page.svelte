@@ -10,9 +10,13 @@
 		MOSCOW,
 		SPEC_VERSIONS,
 		STATUSES,
+		TABLE_VERSIONS,
 		USER_CLASSES,
 		score,
 		statusColumn,
+		statusColour,
+		statusDescription,
+		isSolved,
 		type Story
 	} from '#lib/schema.ts';
 	import type { PageProps } from './$types';
@@ -21,7 +25,6 @@
 
 	// Filters and sorting live in the address bar, so a view can be bookmarked or shared.
 	const NONE = 'none';
-	const SOLVED = 'Standardized';
 	const param = (key: string) => page.url.searchParams.get(key) ?? '';
 	const filters = $derived({
 		moscow: param('priority'),
@@ -29,9 +32,19 @@
 		userClass: param('class'),
 		rfc: param('rfc'),
 		by: param('by'),
-		// "Solved" = standardized in the latest spec version.
+		// Solved statuses (Core, Core extension…) are marked in config.yaml.
 		hideSolved: param('hide') === 'solved'
 	});
+	// Which spec version the status chips and "hide solved" look at.
+	const version = $derived(SPEC_VERSIONS.includes(param('v')) ? param('v') : LATEST_VERSION);
+	// "Changed from A to B": stories whose status differs between two versions.
+	const known = (v: string) => (SPEC_VERSIONS.includes(v) ? v : '');
+	const change = $derived({ from: known(param('from')), to: known(param('to')) });
+	const comparing = $derived(!!change.from && !!change.to);
+	// Default columns, plus any version currently in use, in spec order.
+	const shownVersions = $derived(
+		SPEC_VERSIONS.filter((v) => TABLE_VERSIONS.includes(v) || [version, change.from, change.to].includes(v))
+	);
 	const sort = $derived({ key: param('sort') || 'id', descending: param('dir') === 'desc' });
 	let search = $state(param('q'));
 
@@ -44,27 +57,27 @@
 		goto(url, { replace: true, reset: false });
 	}
 	const toggle = (key: string, value: string) => setParams({ [key]: param(key) === value ? '' : value });
-	const filtered = $derived(search !== '' || Object.values(filters).some(Boolean));
+	const filtered = $derived(search !== '' || Object.values(filters).some(Boolean) || comparing);
 	function clear() {
 		search = '';
-		setParams({ q: '', priority: '', status: '', class: '', rfc: '', by: '', hide: '' });
+		setParams({ q: '', priority: '', status: '', class: '', rfc: '', by: '', hide: '', v: '', from: '', to: '' });
 	}
 
-	const columns: { key: string; label: string; value: (s: Story) => string | number | null }[] = [
+	const columns = $derived<{ key: string; label: string; value: (s: Story) => string | number | null }[]>([
 		{ key: 'id', label: 'ID', value: (s) => s.id },
 		{ key: 'title', label: 'Story', value: (s) => s.title.toLowerCase() },
 		{ key: 'by', label: 'Requested by', value: (s) => s.requested_by[0]?.toLowerCase() ?? null },
 		{ key: 'rfcs', label: 'RFCs', value: (s) => s.rfcs[0] ?? null },
-		...SPEC_VERSIONS.map((version) => ({
-			key: statusColumn(version),
-			label: version,
-			value: (s: Story) => STATUSES.indexOf(s.status[version])
+		...shownVersions.map((v) => ({
+			key: statusColumn(v),
+			label: v,
+			value: (s: Story) => STATUSES.indexOf(s.status[v])
 		})),
 		{ key: 'moscow', label: 'Priority', value: (s) => (s.moscow ? MOSCOW.indexOf(s.moscow) : null) },
 		{ key: 'value', label: 'Value', value: (s) => s.value },
 		{ key: 'effort', label: 'Effort', value: (s) => s.effort },
 		{ key: 'score', label: 'Score', value: score }
-	];
+	]);
 
 	const visible = $derived.by(() => {
 		const needle = search.trim().toLowerCase();
@@ -74,14 +87,15 @@
 			.filter(
 				(s) =>
 					(!filters.moscow || (filters.moscow === NONE ? !s.moscow : s.moscow === filters.moscow)) &&
-					(!filters.status || s.status[LATEST_VERSION] === filters.status) &&
+					(!filters.status || s.status[version] === filters.status) &&
 					(!filters.userClass ||
 						(filters.userClass === NONE
 							? !s.user_classes.length
 							: s.user_classes.includes(filters.userClass))) &&
 					(!filters.rfc || s.rfcs.includes(filters.rfc)) &&
 					(!filters.by || s.requested_by.includes(filters.by)) &&
-					!(filters.hideSolved && s.status[LATEST_VERSION] === SOLVED) &&
+					!(filters.hideSolved && isSolved(s.status[version])) &&
+					(!comparing || s.status[change.from] !== s.status[change.to]) &&
 					(!needle || JSON.stringify(s).toLowerCase().includes(needle))
 			)
 			.sort((a, b) => {
@@ -100,7 +114,7 @@
 		{ value: NONE, label: 'Not prioritized', n: count((s) => !s.moscow) }
 	]);
 	const statuses = $derived(
-		STATUSES.map((status) => ({ value: status, n: count((s) => s.status[LATEST_VERSION] === status) }))
+		STATUSES.map((status) => ({ value: status, n: count((s) => s.status[version] === status) }))
 	);
 	const unique = (pick: (s: Story) => string[]) => [...new Set(data.stories.flatMap(pick))].sort();
 	const rfcs = $derived(unique((s) => s.rfcs));
@@ -130,14 +144,34 @@
 		{/each}
 	</div>
 	<div class="chips">
-		<h2>Status in {LATEST_VERSION}</h2>
+		<h2>Status in</h2>
+		<div class="segmented" role="group" aria-label="Spec version">
+			{#each SPEC_VERSIONS as v (v)}
+				<button
+					aria-pressed={version === v}
+					onclick={() => setParams({ v: v === LATEST_VERSION ? '' : v })}>{v}</button
+				>
+			{/each}
+		</div>
 		{#each statuses as chip (chip.value)}
-			<button
-				class="chip"
-				aria-pressed={filters.status === chip.value}
-				onclick={() => toggle('status', chip.value)}>{chip.value} <b>{chip.n}</b></button
-			>
+			{#if chip.n || filters.status === chip.value}
+				<button
+					class="chip"
+					aria-pressed={filters.status === chip.value}
+					title={statusDescription(chip.value)}
+					onclick={() => toggle('status', chip.value)}
+					><i style:background={statusColour(chip.value)}></i>{chip.value} <b>{chip.n}</b></button
+				>
+			{/if}
 		{/each}
+		<label class="toggle" title="Hides stories that are {STATUSES.filter(isSolved).join(' or ')} in {version}">
+			<input
+				type="checkbox"
+				checked={filters.hideSolved}
+				onchange={(e) => setParams({ hide: e.currentTarget.checked ? 'solved' : '' })}
+			/>
+			Hide solved
+		</label>
 	</div>
 	<div class="row">
 		<input
@@ -172,14 +206,18 @@
 			<option value="">Anyone</option>
 			{#each requesters as name (name)}<option>{name}</option>{/each}
 		</select>
-		<label class="toggle">
-			<input
-				type="checkbox"
-				checked={filters.hideSolved}
-				onchange={(e) => setParams({ hide: e.currentTarget.checked ? 'solved' : '' })}
-			/>
-			Hide {SOLVED.toLowerCase()} in {LATEST_VERSION}
-		</label>
+		<span class="change">
+			Changed from
+			<select aria-label="Changed from version" value={change.from} onchange={(e) => setParams({ from: e.currentTarget.value })}>
+				<option value="">–</option>
+				{#each SPEC_VERSIONS as v (v)}<option>{v}</option>{/each}
+			</select>
+			to
+			<select aria-label="Changed to version" value={change.to} onchange={(e) => setParams({ to: e.currentTarget.value })}>
+				<option value="">–</option>
+				{#each SPEC_VERSIONS as v (v)}<option>{v}</option>{/each}
+			</select>
+		</span>
 		{#if filtered}<button class="button" onclick={clear}>Clear filters</button>{/if}
 		<span class="muted count">
 			{visible.length === data.stories.length
@@ -226,8 +264,8 @@
 					</td>
 					<td>{story.requested_by.join(', ')}</td>
 					<td><RfcEditor {story} known={rfcs} /></td>
-					{#each SPEC_VERSIONS as version (version)}
-						<td><StatusSelect {story} {version} /></td>
+					{#each shownVersions as v (v)}
+						<td><StatusSelect {story} version={v} /></td>
 					{/each}
 					<td><ScoreSelect {story} field="moscow" /></td>
 					<td><ScoreSelect {story} field="value" /></td>
@@ -280,6 +318,34 @@
 	.chip[aria-pressed='true'] b {
 		color: inherit;
 	}
+	.chip i {
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		margin-right: 5px;
+	}
+	.segmented {
+		display: inline-flex;
+		border: 1px solid var(--line);
+		border-radius: 6px;
+		overflow: hidden;
+		margin-right: 6px;
+	}
+	.segmented button {
+		border: 0;
+		padding: 2px 10px;
+		background: var(--surface);
+		cursor: pointer;
+		font-weight: 600;
+	}
+	.segmented button + button {
+		border-left: 1px solid var(--line);
+	}
+	.segmented button[aria-pressed='true'] {
+		background: var(--accent);
+		color: var(--on-accent);
+	}
 	.toggle {
 		display: flex;
 		align-items: center;
@@ -291,6 +357,12 @@
 	#search {
 		flex: 1 1 240px;
 		max-width: 360px;
+	}
+	.change {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		white-space: nowrap;
 	}
 	.count {
 		margin-left: auto;

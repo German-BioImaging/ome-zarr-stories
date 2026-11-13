@@ -6,12 +6,57 @@
 # Keep the quotes, or YAML reads 0.6 as a number.
 spec_versions: ["0.6", "0.9dev"]
 
-# Allowed values of the status columns. The first one is the default for a new story.
+# How well each spec version supports a story, from least to most supported; the table sorts
+# in this order. The first one is the default for a new story.
+#   colour: one of grey, pink, violet, red, orange, yellow, blue, amber, teal, green
+#   solved: whether "Hide solved" hides stories with this status
 statuses:
-  - Unassessed
-  - Not possible
-  - Transitional
-  - Standardized
+  - name: Unassessed
+    colour: grey
+    solved: false
+    description: Nobody has looked at this yet.
+  - name: Unsure
+    colour: pink
+    solved: false
+    description: Looked at, but which level applies is unclear. Needs discussion.
+  - name: Breaking
+    colour: red
+    solved: false
+    description: Cannot be done without violating the spec.
+  - name: Out of spec
+    colour: orange
+    solved: false
+    description: >-
+      Valid OME-Zarr only through custom attributes or side files; other tools
+      won't understand it.
+  - name: Awkward
+    colour: yellow
+    solved: false
+    description: >-
+      The spec allows it only by bending features beyond their intent, e.g. dummy
+      axes, splitting one image into several, or encoding simple transforms as fields.
+  - name: Possible
+    colour: blue
+    solved: false
+    description: >-
+      General spec features express it as they are meant to be used, though nothing
+      is dedicated to it.
+  - name: Community extension
+    colour: violet
+    solved: false
+    description: >-
+      A published extension using the RFC-8 mechanism, maintained outside the spec.
+      Readers know it is there, but support varies by tool.
+  - name: Core extension
+    colour: teal
+    solved: true
+    description: >-
+      Spec-maintained metadata outside the core: transitional metadata today
+      (e.g. omero, bioformats2raw.layout), official RFC-8 extensions later.
+  - name: Core
+    colour: green
+    solved: true
+    description: Explicitly specified in the core spec.
 
 # Who a story is for. A story can list several (or none, until it is triaged).
 user_classes:

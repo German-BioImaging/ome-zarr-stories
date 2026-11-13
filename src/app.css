@@ -11,6 +11,14 @@
 	--danger: light-dark(#c62828, #ff8a80);
 	--green: light-dark(#1e7b3c, #6fcf8a);
 	--amber: light-dark(#a15c00, #f0b35a);
+	--teal: light-dark(#0b7a75, #5fd3c8);
+	--blue: light-dark(#2563c9, #82b1ff);
+	--orange: light-dark(#c2410c, #ff9f68);
+	--yellow: light-dark(#c99700, #f2c94c);
+	--pink: light-dark(#c2255c, #f783ac);
+	--red: var(--danger);
+	--violet: light-dark(#7048c4, #b9a0ff);
+	--grey: var(--muted);
 	--radius: 8px;
 }
 

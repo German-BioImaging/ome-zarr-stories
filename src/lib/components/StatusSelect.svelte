@@ -1,16 +1,11 @@
 <script lang="ts">
 	import { patchStory } from '#lib/api.ts';
-	import { STATUSES, statusColumn, type Story } from '#lib/schema.ts';
+	import { STATUSES, statusColour, statusColumn, statusDescription, type Story } from '#lib/schema.ts';
 
 	// Looks like a status badge; click it to pick another status, saved at once.
 	let { story, version }: { story: Story; version: string } = $props();
 
 	const current = $derived(story.status[version]);
-	const TONES: Record<string, string> = {
-		Standardized: 'green',
-		Transitional: 'amber',
-		'Not possible': 'red'
-	};
 
 	async function change(event: Event & { currentTarget: HTMLSelectElement }) {
 		const select = event.currentTarget;
@@ -23,10 +18,11 @@
 	aria-label="Status in {version} of {story.id}"
 	value={current}
 	onchange={change}
-	data-tone={TONES[current] ?? 'neutral'}
+	title={statusDescription(current)}
+	style:color={statusColour(current)}
 >
 	{#each STATUSES as status (status)}
-		<option>{status}</option>
+		<option title={statusDescription(status)}>{status}</option>
 	{/each}
 </select>
 
@@ -37,7 +33,6 @@
 		border-radius: 999px;
 		font-size: 12px;
 		cursor: pointer;
-		color: var(--muted);
 		border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
 		/* the badge tint, plus a small chevron so it reads as editable */
 		background:
@@ -47,15 +42,6 @@
 	}
 	select:hover {
 		border-color: currentColor;
-	}
-	[data-tone='red'] {
-		color: var(--danger);
-	}
-	[data-tone='amber'] {
-		color: var(--amber);
-	}
-	[data-tone='green'] {
-		color: var(--green);
 	}
 	option {
 		color: var(--text);

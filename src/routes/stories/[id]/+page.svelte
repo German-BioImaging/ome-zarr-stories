@@ -48,6 +48,11 @@
 			<p class="pre"><Linkified text={story.workaround} /></p>
 		{/if}
 
+		{#if story.notes}
+			<h2>{LABELS.notes}</h2>
+			<p class="pre"><Linkified text={story.notes} /></p>
+		{/if}
+
 		{#if related.length}
 			<h2>{LABELS.related}</h2>
 			<ul class="plain">

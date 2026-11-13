@@ -45,7 +45,7 @@ describe('escaping', () => {
 describe('validation rejects', () => {
 	test.each([
 		['a changed header', HEADER.replace('title', 'Title') + '\n' + row('STORY-001'), 'header'],
-		['a wrong column count', file(row('STORY-001') + '\textra'), 'expected 17 columns, found 18'],
+		['a wrong column count', file(row('STORY-001') + '\textra'), `expected ${COLUMNS.length} columns, found ${COLUMNS.length + 1}`],
 		['a bad ID', file(row('US-1')), 'STORY-001'],
 		['a missing title', file(row('STORY-001', { title: ' ' })), 'Title is required'],
 		['an unknown priority', file(row('STORY-001', { moscow: 'Maybe' })), 'moscow'],

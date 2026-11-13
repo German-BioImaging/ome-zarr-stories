@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { LATEST_VERSION, SPEC_VERSIONS, STATUSES, type Story } from '#lib/schema.ts';
+	import { LATEST_VERSION, SPEC_VERSIONS, STATUSES, statusColour as colour, statusDescription, type Story } from '#lib/schema.ts';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -14,14 +14,6 @@
 	);
 	const setVersion = (v: string) => goto(`?version=${encodeURIComponent(v)}`, { replace: true, reset: false });
 
-	// Same meaning as the status badges elsewhere; unknown statuses (added in config.yaml) fall back to grey.
-	const COLOURS: Record<string, string> = {
-		Standardized: 'var(--green)',
-		Transitional: 'var(--amber)',
-		'Not possible': 'var(--danger)',
-		Unassessed: 'var(--muted)'
-	};
-	const colour = (status: string) => COLOURS[status] ?? 'var(--muted)';
 
 	const W = 1000;
 	const H = 640;
@@ -63,7 +55,7 @@
 
 <ul class="legend" aria-label="Legend">
 	{#each counts as { status, n } (status)}
-		<li><span class="dot" style:background={colour(status)}></span>{status} <b>{n}</b></li>
+		<li title={statusDescription(status)}><span class="dot" style:background={colour(status)}></span>{status} <b>{n}</b></li>
 	{/each}
 </ul>
 

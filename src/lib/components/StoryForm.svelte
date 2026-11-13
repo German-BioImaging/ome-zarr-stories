@@ -127,6 +127,11 @@
 		<textarea name="workaround" rows="2">{values.workaround}</textarea>
 	</label>
 
+	<label class="wide">
+		{@render field('notes', 'why each status was given, open questions. Line breaks are kept.')}
+		<textarea name="notes" rows="4">{values.notes}</textarea>
+	</label>
+
 	<label>
 		{@render field('requested_by', 'separate with ;')}
 		<input name="requested_by" value={values.requested_by} list="requesters" />

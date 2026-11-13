@@ -4,7 +4,13 @@ import { config } from './config.ts';
 
 export const SPEC_VERSIONS: readonly string[] = config.spec_versions;
 export const LATEST_VERSION = SPEC_VERSIONS[SPEC_VERSIONS.length - 1];
-export const STATUSES: readonly string[] = config.statuses;
+export const STATUSES: readonly string[] = config.statuses.map((s) => s.name);
+const STATUS_INFO = new Map(config.statuses.map((s) => [s.name, s]));
+/** CSS colour of a status, the same everywhere it is shown. */
+export const statusColour = (status: string) => `var(--${STATUS_INFO.get(status)?.colour ?? 'grey'})`;
+export const statusDescription = (status: string) => STATUS_INFO.get(status)?.description ?? '';
+/** Whether the spec already covers a story with this status well enough to set it aside. */
+export const isSolved = (status: string) => STATUS_INFO.get(status)?.solved ?? false;
 export const USER_CLASSES = config.user_classes;
 export const MOSCOW: readonly string[] = ['Must', 'Should', 'Could', "Won't"];
 export const SCORES: readonly number[] = [1, 2, 3, 4, 5];
@@ -95,7 +101,7 @@ const fields = z.object({
 });
 
 export type Story = z.output<typeof fields> & {
-	/** Status per spec version, e.g. `{ '0.6': 'Standardized' }`. */
+	/** Status per spec version, e.g. `{ '0.6': 'Core' }`. */
 	status: Record<string, string>;
 };
 

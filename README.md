@@ -60,13 +60,33 @@ Rules for the file:
   backslash as `\\`.
 - **Score** (value ÷ effort) is shown in the app but not stored.
 
+### Statuses
+
+How well a spec version supports a story, from most to least supported:
+
+| Status | Meaning |
+|---|---|
+| Core | Explicitly specified in the core spec |
+| Core extension | Spec-maintained metadata outside the core: transitional metadata today (e.g. `omero`), official RFC-8 extensions later |
+| Community extension | A published extension using the RFC-8 mechanism, maintained outside the spec; support varies by tool |
+| Possible | General spec features express it as they are meant to be used, though nothing is dedicated to it |
+| Awkward | The spec allows it only by bending features beyond their intent: dummy axes, splitting one image into several, encoding simple transforms as fields |
+| Out of spec | Valid OME-Zarr only through custom attributes or side files; other tools won't understand it |
+| Breaking | Cannot be done without violating the spec |
+| Unsure | Looked at, but which level applies is unclear; needs discussion |
+| Unassessed | Nobody has looked at it yet |
+
+Core and Core extension count as solved, so "Hide solved" hides them. The list, colours and
+descriptions live in `config.yaml`.
+
 The app refuses to load a file that breaks these rules and lists the offending lines, and
 `npm test` fails on it, so it can be used as a check in CI.
 
 ## Changing the vocabularies
 
 [`config.yaml`](config.yaml) holds the lists the stories are checked against: the user classes,
-the statuses, and the OME-Zarr versions that have a status column. Edit that file to add or rename
+the statuses (with the colour and meaning of each), and the OME-Zarr versions that have a status
+column. Edit that file to add or rename
 a value. Adding a version there means adding its `status_<version>` column to the TSV too.
 
 ## How the code is organized

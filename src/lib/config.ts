@@ -3,7 +3,8 @@ import * as z from 'zod';
 import raw from '../../config.yaml?raw';
 
 const names = z.array(z.string().min(1)).min(1);
-export const COLOURS = ['grey', 'pink', 'violet', 'red', 'orange', 'yellow', 'blue', 'amber', 'teal', 'green'] as const;
+/** Status colours (app.css): a red↔blue diverging scale around a neutral, plus off-scale hollow and violet. */
+export const COLOURS = ['hollow', 'violet', 'red-3', 'red-2', 'red-1', 'neutral', 'blue-1', 'blue-2', 'blue-3'] as const;
 
 const schema = z.strictObject({
 	spec_versions: names,

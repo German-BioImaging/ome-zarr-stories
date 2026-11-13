@@ -9,7 +9,7 @@ export const LATEST_VERSION = SPEC_VERSIONS[SPEC_VERSIONS.length - 1];
 export const STATUSES: readonly string[] = config.statuses.map((s) => s.name);
 const STATUS_INFO = new Map(config.statuses.map((s) => [s.name, s]));
 /** CSS colour of a status, the same everywhere it is shown. */
-export const statusColour = (status: string) => `var(--${STATUS_INFO.get(status)?.colour ?? 'grey'})`;
+export const statusColour = (status: string) => `var(--${STATUS_INFO.get(status)?.colour ?? 'hollow'})`;
 export const statusDescription = (status: string) => STATUS_INFO.get(status)?.description ?? '';
 /** Whether the spec already covers a story with this status well enough to set it aside. */
 export const isSolved = (status: string) => STATUS_INFO.get(status)?.solved ?? false;

@@ -324,6 +324,8 @@
 		height: 8px;
 		border-radius: 50%;
 		margin-right: 5px;
+		vertical-align: -0.5px;
+		border: 1px solid color-mix(in srgb, var(--muted) 60%, transparent); /* keeps hollow visible */
 	}
 	.segmented {
 		display: inline-flex;

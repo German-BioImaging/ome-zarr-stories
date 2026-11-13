@@ -19,7 +19,7 @@
 	value={current}
 	onchange={change}
 	title={statusDescription(current)}
-	style:color={statusColour(current)}
+	style:--dot={statusColour(current)}
 >
 	{#each STATUSES as status (status)}
 		<option title={statusDescription(status)}>{status}</option>
@@ -29,19 +29,22 @@
 <style>
 	select {
 		appearance: none;
-		padding: 1px 22px 1px 8px;
+		padding: 1px 22px 1px 20px;
 		border-radius: 999px;
 		font-size: 12px;
 		cursor: pointer;
-		border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
-		/* the badge tint, plus a small chevron so it reads as editable */
+		color: var(--text);
+		border: 1px solid var(--line);
+		/* text stays in ink; a status dot (ringed, so "hollow" still shows) carries the colour,
+		   plus a small chevron so it reads as editable */
 		background:
+			radial-gradient(circle at 10px 50%, var(--dot) 4px, var(--muted) 4.5px 5px, transparent 5.5px),
 			url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23888'/%3E%3C/svg%3E")
 				no-repeat right 8px center,
-			color-mix(in srgb, currentColor 9%, transparent);
+			var(--surface);
 	}
 	select:hover {
-		border-color: currentColor;
+		border-color: var(--muted);
 	}
 	option {
 		color: var(--text);

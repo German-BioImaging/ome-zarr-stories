@@ -87,7 +87,8 @@
 				onfocus={() => (hovered = story)}
 				onblur={() => (hovered = null)}
 			>
-				<circle cx={p.x} cy={p.y} r="9" fill={colour(story.status[version])} />
+				<circle cx={p.x} cy={p.y} r="9" fill={colour(story.status[version])}
+					class:hollow={colour(story.status[version]) === 'var(--hollow)'} />
 				<text x={p.x} y={p.y + 22}>{story.id.replace('STORY-', '')}</text>
 			</a>
 		{/each}
@@ -147,6 +148,7 @@
 		width: 12px;
 		height: 12px;
 		border-radius: 50%;
+		border: 1px solid color-mix(in srgb, var(--muted) 60%, transparent); /* keeps hollow visible */
 	}
 	.frame {
 		position: relative;
@@ -166,6 +168,10 @@
 		stroke: var(--surface);
 		stroke-width: 2;
 		transition: r 0.1s;
+	}
+	circle.hollow {
+		stroke: var(--muted);
+		stroke-width: 1.5;
 	}
 	a:hover circle,
 	a:focus circle {

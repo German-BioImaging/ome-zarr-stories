@@ -18,6 +18,7 @@ npm run dev     # then open http://localhost:5173
 - **Stories** is the table: search, filter, sort, and set priority, value and effort in place.
 - **Board** shows the stories by priority; drag a card to another column to re-prioritize.
 - **Map** places similar stories close together, coloured by their status in a chosen version.
+- **Progress** shows, per spec version, the share of stories at each status; click a segment to list them.
 - Click a title for the full story, where you can edit or delete it.
 
 Filters and sorting are kept in the address bar, so a view can be bookmarked or shared.
@@ -102,6 +103,6 @@ status switch or the "Changed from … to …" filter.
 | `src/lib/server/store.ts` | Reads the file and adds, changes and deletes stories |
 | `src/lib/server/similarity.ts` | Lays out the map from the wording of the stories |
 | `src/lib/components/` | Shared pieces of the interface |
-| `src/routes/` | The pages: table, board, map, story, edit, new |
+| `src/routes/` | The pages: table, board, map, progress, story, edit, new |
 
 Built with [SvelteKit](https://svelte.dev/docs/kit).

@@ -11,7 +11,8 @@
 	const links = [
 		{ href: '/', label: 'Stories' },
 		{ href: '/board', label: 'Board' },
-		{ href: '/map', label: 'Map' }
+		{ href: '/map', label: 'Map' },
+		{ href: '/progress', label: 'Progress' }
 	];
 </script>
 

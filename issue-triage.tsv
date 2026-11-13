@@ -1,0 +1,280 @@
+issue	state	title	verdict	reason
+1	closed	Initial review	no-story	process-governance
+2	closed	Constrain dtypes & shape for multiscale arrays	no-story	spec-clarification
+4	closed	Copy Java examples & multiscales JSON into spec	no-story	schema-validation
+6	closed	Include link in each spec section to the RFC conversation	no-story	docs-website
+8	closed	Extract metadata blocks for testing	no-story	schema-validation
+9	closed	HCS group layout	new:STORY-076	
+10	closed	HCS Well metadata	new:STORY-076	
+11	closed	HCS acquisition metadata	update:STORY-076	
+12	closed	Scale metadata	no-story	spec-clarification
+14	closed	Multi-scaled image labels	new:STORY-077	
+15	closed	json-ld, "omero" metadata and labels paths	no-story	schema-validation
+17	closed	Multiscales questions	no-story	spec-clarification
+18	closed	Constrain numChannels and numTimepoints for multiscale arrays	no-story	spec-clarification
+20	closed	5D or List< 4D >	no-story	spec-clarification
+21	closed	Clarify that "image-label" and "multiscales" are siblings	no-story	spec-clarification
+22	closed	Update label properties to include `example:` prefix	no-story	schema-validation
+25	closed	Z-downsampling metadata	new:STORY-078	
+26	closed	z_downsampling metadata	new:STORY-078	
+28	closed	Transformation Specification	update:STORY-026	
+29	closed	Hierarchical chunk storage	new:STORY-079	
+30	closed	(Nonlinear) Transformation specification	update:STORY-027	
+31	open	Collections Specification	update:STORY-068	
+32	closed	Progressive specification	no-story	spec-clarification
+33	open	Mesh specification	new:STORY-080	
+35	closed	Data dimensionality and axes metadata	update:STORY-024	
+37	closed	"Compound" datasets	new:STORY-083	
+38	closed	The specification uses text quotes and markdown quotes interchangably	no-story	spec-clarification
+45	closed	Spec development process	no-story	process-governance
+47	closed	Decoupling version numbers of different specifications	no-story	process-governance
+48	open	Compatibility with xarray	new:STORY-084	
+49	closed	Napari plugin for ome-zarr	no-story	docs-website
+51	closed	Add example data links to ngff specification	no-story	docs-website
+53	closed	Add scale factors used for MIP to multiscales metadata	new:STORY-078	
+54	closed	Spec naming style	no-story	process-governance
+55	closed	A few misc questions	no-story	spec-clarification
+58	closed	NGFF dataset validator	no-story	schema-validation
+62	closed	<code data-opaque bs-autolink-syntax='	no-story	docs-website
+65	open	Storing tables	update:STORY-070	
+66	closed	json terminology	no-story	schema-validation
+68	closed	Specification for extensions	no-story	spec-clarification
+71	closed	document client feature support	no-story	docs-website
+73	open	Shapes	new:STORY-081	
+74	closed	affines and dimensions	no-story	spec-clarification
+75	closed	Investigate OpenMINDS as an option for ngff validation	no-story	schema-validation
+79	open	Clarify difference between image-label properties and colors	new:STORY-085	
+80	closed	Specify which zarr version ome.zarr is using	no-story	process-governance
+81	closed	Specify the encoding of the json metadata	no-story	schema-validation
+82	closed	json-schema for v0.4 spec	no-story	schema-validation
+83	closed	just one top-level version	no-story	process-governance
+86	closed	Finalizing v0.4	no-story	process-governance
+89	closed	Define the origin w.r.t. the pixel corner or center	new:STORY-086	
+91	open	Disallow mismatching axes units and types	no-story	spec-clarification
+94	closed	Proposing spaces and transforms	no-story	spec-clarification
+99	open	adata slots for table and point spec in ngff	update:STORY-070	
+100	open	Misc spec clarifications	no-story	spec-clarification
+101	closed	Transformation types	no-story	spec-clarification
+102	closed	Multiscale metadata	no-story	spec-clarification
+105	open	More clarifications of the "image-label" spec	no-story	spec-clarification
+107	open	Proposal: don't mix arrays and groups	no-story	spec-clarification
+108	closed	"labels" metadata section is confusing (and wrong?)	no-story	spec-clarification
+109	closed	"image-label" not camel case	no-story	spec-clarification
+111	open	image-label: lost of original context	update:STORY-014	
+121	closed	Multiple annotations on a pixel	no-story	off-topic (QuPath usage)
+125	closed	image-label metadata: invalid JSON in example	no-story	schema-validation
+132	closed	Process definition	no-story	process-governance
+133	open	How do we represent regions of interest in OME-NGFF?	new:STORY-082	
+135	closed	Allow `.` as the dimension separator	no-story	spec-clarification
+140	closed	List sources of sample data	no-story	docs-website
+141	open	consolidate Plate to preview image	new:STORY-087	
+142	closed	Add optional "long_name" to "axes"	update:STORY-024	
+143	closed	Coordinate Transformation to map yx labels to cyx image	update:STORY-014	
+144	open	Referencing zarr stores, groups, arrays, and attributes 	update:STORY-016	
+145	closed	Rename to OME-Zarr?	no-story	process-governance
+146	closed	Affine transformations specification are not decoupled from their input and output spaces	no-story	spec-clarification
+147	closed	PR rendering CI	no-story	docs-website
+151	closed	Multiscales order matters and indicates array size / resolution (?)	no-story	spec-clarification
+153	closed	Scale array MUST have the same dtype	no-story	spec-clarification
+155	closed	specs for axes coordinates information	update:STORY-075	
+156	closed	units instead of unit	no-story	spec-clarification
+158	closed	Mixed content warning on https://ngff.openmicroscopy.org/latest/	no-story	schema-validation
+159	closed	ngff.o.org as a sign post	no-story	spec-clarification
+162	closed	Sample NGFF (OME Zarr) 3D volumetric data	no-story	docs-website
+163	closed	Interpreting OME Zarr data	no-story	spec-clarification
+164	closed	Find out what labeled object represents if names to labels have not been given	new:STORY-085	
+166	open	FAQ: what are ways to transition to NGFFs?	no-story	docs-website
+169	closed	Backporting test suites	no-story	schema-validation
+173	open	Metadata: User stories for named channels	new:STORY-075	
+174	closed	Adapt the CF conventions data model	new:STORY-084	
+178	open	Efficiently storing millions of spots	new:STORY-088	
+180	closed	website: document hosting a community call	no-story	docs-website
+181	closed	website: roadmap/status page	no-story	docs-website
+182	closed	Adopt Zarr v3	no-story	spec-clarification
+183	open	Clarification of whether top-level fields in spec are optional or required	no-story	spec-clarification
+184	open	Link to the JSON schemas from the spec	no-story	docs-website
+185	closed	Change `version` field(s) from SHOULD to MUST	no-story	process-governance
+187	open	Optional sub-group(s) in multiscale image	no-story	spec-clarification
+188	open	Document image.sc @ngff group and/or alternative mailing list	no-story	docs-website
+192	closed	relax omero metadata	no-story	spec-clarification
+195	closed	Add rtd metadata to enable doc contributions	no-story	docs-website
+197	open	Clarify dimension order in the specs	no-story	spec-clarification
+199	open	total coordinates	update:STORY-011	
+200	open	How to make multiscale image parsing more deterministic 	no-story	spec-clarification
+201	closed	Simplifying multiscale coordinateTransformations	no-story	spec-clarification
+203	open	units for data	new:STORY-083	
+205	open	should `multiscales` be a collection?	no-story	spec-clarification
+207	open	Single-scale images	new:STORY-089	
+208	closed	clearly defined anatomical orientation	update:STORY-061	
+209	open	extra fields in metadata	no-story	spec-clarification
+213	open	Author, license, project description, and other free text metadata	new:STORY-090	
+215	open	Do we need axis type?	no-story	spec-clarification
+217	closed	Clarification about `_ARRAY_DIMENSIONS`	no-story	spec-clarification
+221	closed	Multiscales datatype(s)	no-story	spec-clarification
+228	closed	Question: given a .zarr what is the best way to say that it is .ome.zarr / ngff?	no-story	spec-clarification
+236	closed	file extension for schema documents	no-story	docs-website
+257	open	Sparse Array Support	new:STORY-091	
+259	closed	RFC-2: clarification about the intent of non OME-NGFF keys	no-story	spec-clarification
+260	open	Clarifying that multiscale images can only be the same image downscaled	no-story	spec-clarification
+264	open	Support for light-sheet (meta) data	update:STORY-039	
+271	closed	spec diffs can be hard to read 	no-story	spec-clarification
+272	closed	Review use of "OME-NGFF"	no-story	process-governance
+274	closed	BIA plates fail to render in vizarr 	no-story	docs-website
+275	open	Add a complete and verbose changelog	no-story	process-governance
+276	closed	Which copy of the SPEC should changes be proposed against?	no-story	spec-clarification
+283	open	Add a logo for OME-zarr	no-story	docs-website
+286	closed	omero metadata structure disappeared from version 0.5 (accidentally?)	no-story	process-governance
+289	closed	Explicit define the relationship between axes and `dimension_names`	no-story	spec-clarification
+296	open	Define "image group"	no-story	spec-clarification
+300	open	Should labels paths point to multiscale images?	no-story	spec-clarification
+302	closed	Tables hard to read on spec website	no-story	docs-website
+303	closed	RFC4: limit orientation metadata to spatial axes	no-story	spec-clarification
+304	closed	How to implement default orientation in RFC 4?	no-story	spec-clarification
+309	closed	Are previous version keys allowed in v0.5?	no-story	process-governance
+312	closed	strict_well 0.5: allOf should have two or more children	no-story	spec-clarification
+315	closed	Expand authorship of spec to all contributors	no-story	process-governance
+321	open	deca SI prefix is missing from the list of units.	no-story	spec-clarification
+322	closed	Plate JSON examples in the specification are invalid	no-story	schema-validation
+323	closed	Provide contribution guide on how to propose changes to JSON schemas	no-story	process-governance
+325	open	List of invalid schema tests and examples	no-story	schema-validation
+326	closed	Improvements to axes metadata	no-story	spec-clarification
+327	closed	RFC 4 is missing a status	no-story	spec-clarification
+331	closed	0.6-dev relaxes constraints of transformations allowed for scales of a multiscale image	no-story	spec-clarification
+332	closed	Allow `input` and `output` transformations (RFC-5) to be `null` (or any optional field!)	no-story	spec-clarification
+335	closed	Add CryoET Open Data to list of resources	no-story	docs-website
+336	closed	Add `iohub` to the list of Tools (File Reading/Writing)	no-story	docs-website
+338	open	Relax "labels must have colors" constraint	update:STORY-063	
+339	open	No way to distinguish image and labels-image groups in 0.5	update:STORY-063	
+341	open	Code examples should be JSONC rather than JSON	no-story	schema-validation
+344	open	Extension points	no-story	spec-clarification
+345	closed	No easy way to switch between versions of the specification on website	no-story	docs-website
+346	closed	An `axis` name is allowed to be `null`	no-story	spec-clarification
+347	open	camelCase vs snake_case	no-story	spec-clarification
+351	closed	Clarify convention for `inverseOf` transformation in rfc5	no-story	spec-clarification
+356	closed	RFC5: not clear what the scope of unique transform names is	no-story	spec-clarification
+357	closed	RFC5: should all coordinate systems in an group require to be transformable to an array?	no-story	spec-clarification
+358	closed	RFC5: a clearer structure for `byDimension`	no-story	spec-clarification
+359	closed	RFC5: clarify delineation, if any, between "root" transformations and "child" transformations	no-story	spec-clarification
+360	closed	RFC5: Simplifying references	no-story	spec-clarification
+366	closed	Including ome-zarr-acknowledgments on the website "Community" page	no-story	docs-website
+378	closed	Add ome2024-ngff-challenge as a converter?	no-story	docs-website
+380	closed	Consider relaxing alphanumeric constraint on group path in well metadata	no-story	spec-clarification
+383	closed	Canonical way of representing paths to other objects	no-story	spec-clarification
+386	closed	Add the "NDPI issue" (lossy compression codecs not supported by Zarr) to the "When would I not use OME-Zarr?" section	no-story	spec-clarification
+392	closed	RFC-7: where is it?	no-story	spec-clarification
+393	open	Ad-free website	no-story	docs-website
+394	closed	Rendering settings and OMERO metadata as part of RFC-8?	update:STORY-069	
+395	open	Packages that vendor the JSON Schemas	no-story	schema-validation
+398	open	.ozx technology compatibility kit	no-story	spec-clarification
+399	closed	ngff repo structural changes	no-story	process-governance
+400	open	Improve the documentation of the RFC process	no-story	docs-website
+401	open	better connect scattered documentation (e.g. ome-ngff-tools) with the website	no-story	docs-website
+402	closed	RFC5 - confusing that 'intrinsic system' is the last entry in coordinateSystems	no-story	spec-clarification
+405	closed	Move `Contributing` section and contribution guide into the same place	no-story	process-governance
+407	closed	Change website theme	no-story	docs-website
+411	closed	Enable more sphinx/myst styling options	no-story	docs-website
+414	closed	Deprecating GitHub Discussions on this repo	no-story	process-governance
+415	closed	ViSUS tools and PIDX format	no-story	docs-website
+416	closed	Mosaic dimension in specification	update:STORY-072	
+417	closed	Should channel axes be allowed in image-label data?	update:STORY-059	
+423	closed	Convention: "field" or `field` in spec text?	no-story	spec-clarification
+425	open	Structure user stories for RFCs/Versions	no-story	process-governance
+426	open	Sort RFCs from highest number to lowest on website	no-story	docs-website
+429	closed	Add BIA-Zarr to the Tools document (https://github.com/BioImage-Archive/bia-zarr)	no-story	docs-website
+430	open	OMERO schema is inconsistent with description	no-story	schema-validation
+433	closed	Proposal: relax regex for `well.images[].path` to allow underscores?	no-story	schema-validation
+436	closed	Add ome-writers to tools	no-story	docs-website
+437	closed	RFC5 - de-duplicate allowed ways to specify named coordinate system	no-story	spec-clarification
+438	closed	RFC5 - explain usage of arraycoordinatesystems `arrayCoordinateSystem`	no-story	spec-clarification
+441	open	How to associate multiple image types at the same spatial location in HCS?	new:STORY-092	
+442	open	Fix author names in zenodo record	no-story	process-governance
+444	open	Manually fix names in past Zenodo records (at least 0.5.2)	no-story	process-governance
+446	closed	RFC5: schema links	no-story	docs-website
+447	closed	v0.6dev3 spec page is missing "scene"	no-story	spec-clarification
+451	closed	Add mesoSPIM OME-Zarr writer to Tools	no-story	docs-website
+452	closed	dependabot issue from #449	no-story	process-governance
+454	closed	Add Zarr.NET to OME-Zarr Tools	no-story	docs-website
+461	closed	Document the discussion wrap-refresh process	no-story	docs-website
+462	open	Rename latest schema documents (#237) — moved from PR	no-story	docs-website
+463	open	Add `UUID` field to `multiscales` - moved from PR	new:STORY-093	
+465	open	Better differentiate between "array" and "Zarr array" in the spec	no-story	spec-clarification
+467	open	Check spelling of author names in PRs for RFCs, comments and reviews 	no-story	process-governance
+470	closed	Add syGlass to the documentation	no-story	docs-website
+471	closed	Add PyMIF to tools	no-story	docs-website
+472	open	Adapt "field" terminology in the spec to canonical JSON terminology	no-story	schema-validation
+473	open	Add some pointer to BIA ome-zarr datasets (perhaps as a Data Resource)	no-story	docs-website
+474	closed	Prohibit channel axes in ImageLabel datasets?	update:STORY-059	
+475	closed	Improve exports of spec/RFCs and other documentation parts on the website	no-story	docs-website
+476	open	Allow nesting HCS and Scenes?	new:STORY-092	
+479	closed	Special characters in ngff-spec lead to build errors	no-story	process-governance
+480	closed	Label multiscales' reference to the `source.image` is broken; should label a coordinate system instead	no-story	spec-clarification
+482	closed	docs: display one or more interactive OME-Zarr images on the documentation website	no-story	docs-website
+490	open	explicitly define the original coordinate system of an array	no-story	spec-clarification
+491	closed	[Issue]: Should axes restrictions inside multsicales also apply to scene coordinate systems?	no-story	spec-clarification
+492	open	[Issue]: semantics of a "pixel"	new:STORY-086	
+493	open	Pre-commit hooks for enforcing formatting	no-story	process-governance
+494	closed	multiscales.datasets coordinate transformations: example inconsistency and spec clarification	no-story	schema-validation
+496	closed	Data resource to add: ExÂME: Expansion Microscopy Atlas of Microbial Eukayotes	no-story	docs-website
+499	closed	Transformations between coordinate systems with different number of dimensions (e.g. multichannel -> single channel)	update:STORY-014	
+500	closed	Add CT scans of Herculaneum scrolls (Vesuvius Challenge) to Data Resources	no-story	docs-website
+504	closed	Add NL Biomero to Tools	no-story	docs-website
+507	closed	Vizarr embedding does not work correctly on some Chrome builds	no-story	docs-website
+510	open	Provide ome-zarr schema in linkML	no-story	docs-website
+513	open	Do not allow `Identity` transformations in multiscale transformations	no-story	spec-clarification
+515	closed	Make RFC-5 page up to date	no-story	spec-clarification
+518	closed	RFC-5 from viewpoint of astronomy	no-story	prior-art comment (astronomy)
+520	closed	RFC-5: relocate coordinates/displacements index transformations	no-story	spec-clarification
+523	closed	RFC-5: Type inconsistency on nested transform input/output	no-story	spec-clarification
+524	closed	Add VoDaSuRe to data resources	no-story	docs-website
+526	closed	Add QuPath to tools (Zarr viewers)	no-story	docs-website
+527	closed	Add Odon to OME-Zarr viewers	no-story	spec-clarification
+530	closed	Add Squid to Tools (likely "others")	no-story	docs-website
+531	closed	Add Zallery to Tools	no-story	docs-website
+532	closed	Add a favicon to the website	no-story	docs-website
+533	closed	some internal links not working	no-story	docs-website
+535	closed	Use html-proofer or similar in the CI to check for broken links and alt text	no-story	docs-website
+537	open	EPIC: rendering settings	update:STORY-017	
+539	closed	add idetik to Tools in the documentation 	no-story	docs-website
+541	closed	docs: add hoct to tools?	no-story	docs-website
+542	closed	docs: add ilastik/clearscale to tools	no-story	docs-website
+543	open	EPIC: document and organize new tools and resources	no-story	docs-website
+550	open	Document/gather support for private S3 OME-Zarr access on tools	no-story	docs-website
+555	closed	Broken link on new Ecosystem page	no-story	docs-website
+557	open	Consider re-organizing the repository based on the progress of ome/governance	no-story	process-governance
+562	open	non-functional linking in how-do-i-use-ome-zarr section of homepage	no-story	docs-website
+563	open	0.6rc0 schemas not served from homepage	no-story	schema-validation
+573	closed	Update events on help desk and community page	no-story	docs-website
+574	closed	add more comprehensive search of OME Zarrr publications to the publication page	no-story	docs-website
+576	open	Document anchor usage	no-story	docs-website
+579	closed	Document `spora` suit of OME-Zarr use cases	no-story	docs-website
+580	open	RFC 7: Channel Metadata (collective scoping)	update:STORY-006	
+582	open	Disable link-preview in Read The Docs and remove hard-coded patches	no-story	docs-website
+585	closed	RFC-4: the anatomical orientation vocabulary is no longer enforced	no-story	spec-clarification
+586	open	RFC-4: making orientation.schema.json usable as a validator	no-story	schema-validation
+591	open	Check for pdflatex PDF build (it only runs on RTD after merge on main)	no-story	docs-website
+593	open	expand and constrain axis `unit` values (UDUNITS-2 controlled vocabulary, MUST)	update:STORY-024	
+594	open	RFC-5 document needs updates for OME-Zarr 0.6rc0	no-story	docs-website
+602	open	[Issue]: minContains on ome.series is inert, so an empty series validates	no-story	schema-validation
+604	open	Add "Implementation" notes to RFCs?	no-story	spec-clarification
+606	open	Add stats on tools?	no-story	docs-website
+611	open	Drop minor fixes for 0.1, 0.2 and 0.3?	no-story	spec-clarification
+625	open	`git submodule` error could use a better message	no-story	process-governance
+626	open	Post-0.6 build improvements	no-story	process-governance
+628	open	OMERO.figure and BIDS examples in RFC-8 need updates	no-story	schema-validation
+631	open	Improve documentation of the "whys" behind OME-Zarr	no-story	docs-website
+634	open	clarify byDimension transform metadata	no-story	spec-clarification
+636	open	Update the ome/ngff repository README	no-story	docs-website
+637	open	Are negative scale values allowed? (schema says > 0, prose says non-zero)	no-story	schema-validation
+638	open	should byDimension inputAxes/outputAxes be "integer" in the schema	no-story	schema-validation
+639	open	Transforms to a label image: is a sequence(scale, translation) allowed?	no-story	spec-clarification
+641	open	Transformation "name": unique within what?	no-story	spec-clarification
+644	open	declare ome-zarr-ness via `zarr-conventions`	no-story	spec-clarification
+645	closed	was dropping requirement of "dimension_names" in array metadata intentional?	no-story	spec-clarification
+646	open	proposal: stable codes for spec rules, in a shared registry?	no-story	spec-clarification
+648	open	fix bug in assigning PR reviewers	no-story	process-governance
+652	closed	Tools/Zarr converter Pymif --> zarrsmith	no-story	docs-website
+657	open	make the navigation toctree for RFCs auto track new RFCs in the correct order	no-story	docs-website
+659	open	specification submodules complicate local website builds	no-story	docs-website
+661	open	leftover mention of `path` in v0.6 scale/translation transforms?	no-story	spec-clarification
+665	open	Add a recommendation (SHOULD) for the use of the `.ome.zarr` suffix	no-story	spec-clarification
+666	open	0.6: MUST or SHOULD omit input.name and output.path in dataset transformations?	no-story	spec-clarification

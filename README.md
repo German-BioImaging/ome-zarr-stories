@@ -88,7 +88,9 @@ The app refuses to load a file that breaks these rules and lists the offending l
 [`config.yaml`](config.yaml) holds the lists the stories are checked against: the user classes,
 the statuses (with the colour and meaning of each), and the OME-Zarr versions that have a status
 column. Edit that file to add or rename
-a value. Adding a version there means adding its `status_<version>` column to the TSV too.
+a value. Adding a version there means adding its `status_<version>` column to the TSV too. `table_versions` picks which
+versions the dashboard shows as columns by default; the others appear when you pick them in the
+status switch or the "Changed from … to …" filter.
 
 ## How the code is organized
 

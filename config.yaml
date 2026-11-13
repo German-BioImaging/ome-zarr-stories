@@ -4,7 +4,8 @@
 # OME-Zarr versions each story is assessed against. Each one is a `status_<version>` column
 # in the TSV, so adding a version here means adding that column to the file too.
 # Keep the quotes, or YAML reads 0.6 as a number.
-spec_versions: ["0.6", "0.9dev"]
+spec_versions: ["0.5", "0.6", "0.9dev"] # oldest → newest
+table_versions: ["0.6", "0.9dev"] # status columns shown on the dashboard by default
 
 # How well each spec version supports a story, from least to most supported; the table sorts
 # in this order. The first one is the default for a new story.

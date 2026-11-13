@@ -3,6 +3,8 @@ import * as z from 'zod';
 import { config } from './config.ts';
 
 export const SPEC_VERSIONS: readonly string[] = config.spec_versions;
+/** Status columns the dashboard shows by default; the others appear when picked. */
+export const TABLE_VERSIONS: readonly string[] = config.table_versions ?? config.spec_versions;
 export const LATEST_VERSION = SPEC_VERSIONS[SPEC_VERSIONS.length - 1];
 export const STATUSES: readonly string[] = config.statuses.map((s) => s.name);
 const STATUS_INFO = new Map(config.statuses.map((s) => [s.name, s]));

@@ -7,6 +7,7 @@ export const COLOURS = ['grey', 'pink', 'violet', 'red', 'orange', 'yellow', 'bl
 
 const schema = z.strictObject({
 	spec_versions: names,
+	table_versions: names.optional(),
 	statuses: z
 		.array(
 			z.strictObject({
@@ -23,4 +24,8 @@ const schema = z.strictObject({
 });
 
 /** The controlled vocabularies from `config.yaml`. Throws at startup if that file is malformed. */
-export const config = schema.parse(parse(raw));
+export const config = schema
+	.refine((c) => (c.table_versions ?? []).every((v) => c.spec_versions.includes(v)), {
+		message: 'every table_versions entry must be in spec_versions'
+	})
+	.parse(parse(raw));

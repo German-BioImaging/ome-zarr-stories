@@ -46,6 +46,7 @@ Other commands:
 | `effort` | How hard it is | `1` (low) to `5` (high), or blank |
 | `status_<version>` | Whether that OME-Zarr version supports it; one column per version in `config.yaml` | One of the statuses in `config.yaml` |
 | `workaround` | How it is, or could be, done today | Free text |
+| `notes` | Why each status was given, open questions; one line per version, e.g. `0.6: …` | Free text, line breaks kept |
 | `rfcs` | RFCs that address it | List of `RFC-5`, `RFC-7`, … |
 | `related` | Linked stories; a link is stored on one story and shown on both | List of existing story IDs |
 | `origin` | Where the story was posted | One `http(s)` link, or blank |

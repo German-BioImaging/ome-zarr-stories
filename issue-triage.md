@@ -40,3 +40,6 @@ Title triage is coarse. Reason tags come from keywords, and the verdicts come fr
 - Comments in the user-story collection threads #649, #173, #84 and #650 were read in full. The relevant ones were added as comment-level sources; the rest are meta or design discussion.
 - Long threads #580, #31, #33, #28, #208 and #104 were skimmed using keywords ("use case", "I want", "as a …"). Use-case comments were added as sources to existing stories.
 - Not crawled: GitHub Discussions, PRs, and ome/ngff-spec issues.
+
+## ome-zarr-ideas (2026-11-16)
+Same protocol, applied to german-BioImaging/ome-zarr-ideas (143 issues) and saved to `issue-triage-ome-zarr-ideas.tsv`. Most issues are outreach, datasets or tooling ideas. About 20 spec-related issues were read in full: 8 became new stories (STORY-114..121), and 12 were added as sources to existing stories. Extra `no-story` reasons: `dataset-conversion`, `docs-outreach-process`, `tooling-infra`.

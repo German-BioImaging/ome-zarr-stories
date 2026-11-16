@@ -26,7 +26,7 @@ None of these is in the TSV yet. To promote one, give it the next `STORY-NNN` an
 
 11. **Single-file OME-Zarr.** (Now STORY-106.) Package a dataset as one zip (`.ozx`) for email, upload and desktop use (ngff#398).
 12. **Fast detection.** (For single files, see STORY-110.) Tell from one small read that a store is OME-Zarr, and which version and parts it uses (ngff#228, ngff#644 zarr-conventions).
-13. **Thumbnails for catalogues.** Include a small preview image for repository listings and galleries. This goes beyond the plate overview in STORY-087.
+13. **Thumbnails for catalogues.** (Now STORY-115.) Include a small preview image for repository listings and galleries. This goes beyond the plate overview in STORY-087.
 14. **Integrity and versioning.** (Versioning is now STORY-103; checksums are still open.) Provide checksums or a manifest, so archives can verify a copy and record edits to a published dataset.
 
 ## Medical and quantitative

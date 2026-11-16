@@ -1,0 +1,144 @@
+issue	state	title	verdict	reason
+1	open	A QLever (or similar) SPARQL explorer to cell coordinates	no-story	tooling-infra
+2	open	Consider a web tool for OMERO-RDF / OMERO-ONTOP	no-story	tooling-infra
+3	closed	Create viewers/apps related to actively curated OME-Zarr datasets	no-story	dataset-conversion
+4	closed	Contribute to OMERO.parade in some way	no-story	tooling-infra
+5	open	A multi-browser platform for conference navigation of an OME-Zarr file (e.g. for teaching)	no-story	tooling-infra
+6	open	Consider markmap.js for vizualizing zarr file structure	no-story	tooling-infra
+7	closed	Track progress/status of the different OME apps with a dashboard	no-story	tooling-infra
+8	open	Set up a repository for OME-Zarr enabled versions of the annotations.csv in the ome2024-ngff-challenge repo	no-story	tooling-infra
+9	closed	Use IDR Projects (flat, just projects) as a baseline mini-example for omero-rdf	no-story	tooling-infra
+10	closed	Add ome-zarr / zarr to https://fileinfo.com/	no-story	tooling-infra
+11	open	Handle image and metadata files during acquisition, similar to Adobe's Bridge	no-story	tooling-infra
+12	open	An Wordpress plugin to visualize OMERO images	no-story	tooling-infra
+13	open	An OME-Zarr CC-BY gallery of basic histology whole-slides	no-story	dataset-conversion
+14	open	EPIC: Zowser is an OME-Zarr browser	no-story	tooling-infra
+15	open	A "spec coverage" browser for ome-zarr complementing the validator	no-story	tooling-infra
+16	closed	Lib overview	no-story	tooling-infra
+17	open	An OMERO.stats app 	no-story	docs-outreach-process
+18	open	Conformance testing	no-story	tooling-infra
+19	open	Web app version of OMERO.mdemic	no-story	tooling-infra
+20	open	ome-zarr crop	update:STORY-025	
+21	open	OMERO "identifier" field	update:STORY-093	
+22	open	Share to wikicommons button	no-story	dataset-conversion
+23	closed	zowser noah's ark - two of each kind	no-story	tooling-infra
+24	open	localize ome-zarr stable materials into languages other than English (e.g. German, Portuguese, Spanish etc)	no-story	docs-outreach-process
+25	open	The OME-NGFF 100 countries challenge	no-story	docs-outreach-process
+26	open	ome-zarr tabs	no-story	tooling-infra
+27	closed	acknowledgment generator pages for the ome-zarr people	no-story	tooling-infra
+28	open	consider ways to pack arbitrary metadata as key-value pairs (somewhat like OMERO does)	new:STORY-114	
+29	open	track ome-zarr uses in published literature/datasets	no-story	dataset-conversion
+30	open	evaluate  "OME-Zarr" on www.openmicroscopy.org	no-story	docs-outreach-process
+31	closed	ome-zarr slide-deck shuffler/picker (likely over-engineering)	no-story	docs-outreach-process
+32	closed	organize the OME-Zarr ideas in a project/kan ban	no-story	tooling-infra
+33	open	Consider a dashboard/Project to track the different main topics for the GerBI-NGFF team	no-story	tooling-infra
+34	closed	Write the Wikipedia page on "Microscopy File Formats" (and perhaps OME)	no-story	docs-outreach-process
+35	closed	Participate in the de.NBI hackathon contributing to OME	no-story	docs-outreach-process
+36	closed	Document better the RFCs in ngff.openmicroscopy.org	no-story	docs-outreach-process
+37	closed	Writing the missing RFC pages in forum.image.sc	no-story	docs-outreach-process
+38	open	OME (+ OMERO, OME-TIFF, OME-Zarr) as Digital Public Goods	no-story	docs-outreach-process
+39	closed	Set a README.md for German-BioImaging on GitHub	no-story	docs-outreach-process
+40	open	Think ways of documenting coverage of parts of the ome-zarr specs	no-story	docs-outreach-process
+41	open	ome-zarr sandbox/light for wet-lab researchers (biology phds + post-docs)	no-story	docs-outreach-process
+42	open	Think about a mobile-first experience of researchers with OMERO/OME-Zarr	no-story	tooling-infra
+43	open	Thinking: Should OME-Zarrs enable native thumbnails?	new:STORY-115	
+44	closed	a microscopy wikibase.cloud instance	no-story	docs-outreach-process
+45	closed	ome-zarr kahoot	no-story	docs-outreach-process
+46	open	Think about OME-Zarr / OMERO for herbarium images	new:STORY-116	
+47	open	thinking about an ome-zarr proxy file for large, s3-stored files	new:STORY-117	
+48	closed	Adding OME-Zarr / Zarr to http://fileformats.archiveteam.org/wiki/Scientific_Data_formats	no-story	docs-outreach-process
+49	open	[EPIC] OME-Zarr/Zarr documentation on the web	no-story	docs-outreach-process
+50	open	investigate the intersection of https://h5web.panosc.eu/  and zarr tooling (e.g. the vscode plugin)	no-story	tooling-infra
+51	closed	GIDE: export IDR RO-Crates	no-story	tooling-infra
+52	open	GH repository/team tooling	no-story	tooling-infra
+53	closed	A visual aid for RO-crates	no-story	tooling-infra
+54	closed	Generating the RFC index	no-story	docs-outreach-process
+55	open	Clarify comment/review and avoiding "dev" versions of RFCs	no-story	docs-outreach-process
+56	closed	A dashboard tracking labels/tags across github for ngff rfcs	no-story	docs-outreach-process
+57	open	Share the ImageJ/FIJI image samples as OME-Zarr	no-story	dataset-conversion
+58	open	A detached-RO-Crate modular infrastructure for (national/regional/institutional) registries	no-story	tooling-infra
+59	closed	NGFF PR Review (2026-01-13)	no-story	tooling-infra
+60	closed	Explore possible connections of BIIGLE software with OME-Zarr	no-story	tooling-infra
+61	open	Consider the w3id namespace for ome	no-story	tooling-infra
+62	closed	Create infrastructure to upload NFDI4BIOIMAGE Zenodo images to Commons	no-story	dataset-conversion
+63	open	Investigate integration of OME-Zarr/OMERO with IIIF resources	no-story	tooling-infra
+64	closed	Upload the IDR thumbnails to Commons	no-story	dataset-conversion
+65	open	Consider the use o GitHub Actions templates in ome	no-story	docs-outreach-process
+66	open	A light microscopy modalities encyclopedia w FBbi + Wiki	no-story	docs-outreach-process
+67	closed	Present RO-Crates for BioImaging at SWAT4LS	no-story	docs-outreach-process
+68	closed	Submit, register, book flights etc for SWAT	no-story	docs-outreach-process
+69	closed	Prepare RO-Crate for bioimaging poster (SWAT2026)	no-story	docs-outreach-process
+70	open	An OME Copilot, similar to the ZEISS Microscopy Copilot	no-story	docs-outreach-process
+71	open	A tool-level config file stating intended ome  zarr compliance	no-story	tooling-infra
+72	open	List of all OME-Zarrs in IDR & BIA	no-story	tooling-infra
+73	open	Consider adding RO-Crates/JSON-LD to IDR for Google Dataset indexing 	no-story	dataset-conversion
+74	open	Explore conversion of Dryad metadata into GIDE-like files	no-story	tooling-infra
+75	open	Gacha style games for bioimage resources	no-story	docs-outreach-process
+76	open	Executable Research Articles — OME-Zarr edition	no-story	tooling-infra
+77	open	BBC038v1 and other Broad datasets as OME-Zarr	no-story	dataset-conversion
+78	open	OME-Zarr pipelines on protocols.io	no-story	tooling-infra
+79	open	OME-Zarr USB-C : small, local files	update:STORY-106	
+80	open	high-level feedbacks on RFCs	no-story	docs-outreach-process
+81	open	.git / SCM tracking for OME-Zarr metadata	update:STORY-103	
+82	open	Add more links to real images @ https://github.com/ome	no-story	docs-outreach-process
+83	open	try and get a better summary of the languages used in the OME-ecosystem	no-story	docs-outreach-process
+84	closed	LinkML paper images to Wikimedia Commons / LinkML Wikipedia page	no-story	dataset-conversion
+85	open	Microguessr	no-story	docs-outreach-process
+86	closed	A write-up/preprint of the OME-NGFF 2024 Challenge	no-story	docs-outreach-process
+87	open	A rolling OME-NGFF samples combined with OME-NGFF-Chalenge	no-story	dataset-conversion
+88	open	Redirect ome.github.io to openmicroscopy.org	no-story	docs-outreach-process
+89	open	Consider pros and cons of "OME-Zarr in YYYY" publications	no-story	tooling-infra
+90	closed	Add Dryad to a GIDE-2 project or a join export with foundingGIDE	no-story	tooling-infra
+91	open	auto assign labels to issues in a repo with shallow LLM	no-story	docs-outreach-process
+93	open	A "Zarr Convention" to declare that a Zarr node is also a RO-Crate	new:STORY-118	
+94	open	[EPIC] Science Stories / Think: "Use Cases" session in the OME NGFF  website	no-story	docs-outreach-process
+95	open	Semantic clustering of the issues in the NGFF github repository	no-story	docs-outreach-process
+96	open	A QR-code generator website with OME branding (or GerBI etc)	no-story	docs-outreach-process
+97	open	OME.figure as a service	no-story	tooling-infra
+98	open	convert the 500GB fish to a more recent version of OME-Zarr	no-story	dataset-conversion
+99	open	"OMNI-Zarr"  (Mini OME-Zarr Spec) 1:1 with OME Tiff	update:STORY-102	
+100	open	Thinking: Gene-expression focus on metadata for (Zarr) images	update:STORY-006	
+101	open	Thinking: relations of Korea BioImage with GIDE and OME-Zarr	no-story	tooling-infra
+102	open	Design a 5-star linked open data equivalent for bioimaging data	no-story	docs-outreach-process
+103	open	A "schema.org:about" extension for OME-Zarr files	new:STORY-119	
+104	closed	CFDE Data Viz Challenge   meets    OME-Zarr Science Stories (11:59 p.m. PST on June 30, 2026)	no-story	tooling-infra
+105	open	Add (OME)-Zarr to Croissant Baker	no-story	tooling-infra
+106	closed	Take over the "gide" handle on GitHub for the GIDE project	no-story	docs-outreach-process
+107	open	Consider plutot as a viewer listed on NGFF tools	no-story	tooling-infra
+108	open	evaluate alternatives for governance/voting to Loomio (policykit and metagov)	no-story	docs-outreach-process
+109	open	an equivalent of the dcm validate corpus/dataset/paper for ome zarr	no-story	dataset-conversion
+110	open	OMERO profiles for key-value pair annotations / OMERO Research Objects / Linked OMERO	no-story	docs-outreach-process
+111	open	an arena app for BIA OME-Zarrs	no-story	tooling-infra
+112	open	A one-liner intro notebook/app/page for ome-zarr	no-story	tooling-infra
+113	open	something like http://ome.github.io/status but per `datasets x tool x rfc` for managing the OME-Zarr 1.0 work	no-story	dataset-conversion
+114	closed	BBBC032 as OME-Zarr in HF	no-story	dataset-conversion
+115	open	an ome / ngff link shortener	no-story	docs-outreach-process
+116	open	Add mouse-over to Vizarr or OME-Zarr.js	no-story	tooling-infra
+117	open	explore intersection of gget and image databases (IDR, GIDE)	no-story	tooling-infra
+118	open	a sidecar metadata Zarr convention (indicating ro-crate-metadata.json or croissant.json or else)	new:STORY-118	
+119	open	A RFC stats page, pulling information from the different OME-Zarr RFCs	no-story	docs-outreach-process
+120	closed	Process commits that mention "OME-Zarr"	no-story	docs-outreach-process
+121	open	Make a video on uploading OME-Zarr datasets to Hugging Face Hub + Buckets	no-story	dataset-conversion
+122	open	Add downsampling and upload BioHub Cell Tracking as OME-Zarr to Hugging Face Datasets / Buckets	no-story	dataset-conversion
+123	open	Re-release Machine Learning datasets that use large TIFFs as OME-Zarr in Hugging Face	no-story	dataset-conversion
+124	open	Thinking: An OMERO plugin / feature to generate OME-Zarr at import stage	no-story	tooling-infra
+125	open	antscan as OME-Zarr	no-story	dataset-conversion
+126	open	rfc complete pdf build/artifacts/export (text + comments + reviews)	no-story	docs-outreach-process
+127	open	FAIR signposting + persitent identifiers + landing page for OME-Zarr	new:STORY-120	
+128	open	Explore intersection of OME-Zarr and Morpho SOurce (e.g. Malawi CT fish)	no-story	dataset-conversion
+129	open	automated feeds with "whats up" in the OME Zarr space	no-story	docs-outreach-process
+130	open	OME-Zarr "virtual cytometry" system	update:STORY-070	
+131	open	A flight simulator over 2D OME-Zarr datasets (WSI, atlas etc)	no-story	dataset-conversion
+132	open	Consider JuliaHealthAudit for OME	no-story	docs-outreach-process
+133	open	Consider a doi_to_cite and other institutional medata field in OME Zarr	update:STORY-090	
+134	open	Document support for Expansion Microscopy in NGFF	update:STORY-096	
+135	open	collector numbers and duplicate sharing (like herbaria) for uniqueness, referencing and evidence against falsification	new:STORY-116	
+136	open	evaluate HF spaces + Bucket demos for OME-Zarr like PMTiles example	no-story	tooling-infra
+137	open	Prototype BioSTAC (STAC for BioImages)	new:STORY-121	
+138	open	nature sci data annotated optical microscopy as ome zarr	no-story	tooling-infra
+139	open	a lightweight tabular collection spec (extending MoBIE)	update:STORY-068	
+140	open	list user classes / stakeholders for ngff	no-story	docs-outreach-process
+141	open	investigate  NIH 3D library as a source/potential user for OME-Zarr	no-story	tooling-infra
+142	open	Consider Evergreen for GerBI and/or OME-related orgs	no-story	docs-outreach-process
+143	open	consider slides.openmicroscopy.org	no-story	docs-outreach-process
+144	open	The Zen of OME-Zarr	no-story	docs-outreach-process

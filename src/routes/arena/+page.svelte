@@ -1,4 +1,6 @@
 <script lang="ts">
+	// Lead words of "As a…, I want…, so that…" lines, shown in bold (as on the story page).
+	const lead = /^(As an?|I want|I need|I would like|so that|so)\b/i;
 	import { enhance } from '$app/forms';
 	import { resolve } from '$app/paths';
 	const base = resolve('/').replace(/\/$/, '');
@@ -81,7 +83,7 @@
 					</span>
 					<strong>{story.title}</strong>
 					<span class="statement">
-						{#each short.split('\n') as line, j (j)}<span>{line}</span>{/each}
+						{#each short.split('\n') as line, j (j)}{@const m = line.match(lead)}<span>{#if m}<b>{m[0]}</b>{line.slice(m[0].length)}{:else}{line}{/if}</span>{/each}
 					</span>
 					{#if rest.length}
 						<details class="more">
@@ -149,6 +151,7 @@
 	.meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.8rem; }
 	.status { display: inline-flex; align-items: center; gap: 0.4rem; }
 	.status i { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+	.statement b { font-weight: 600; color: var(--text); }
 	.more summary { cursor: pointer; font-size: 0.85rem; color: var(--muted); }
 	.more .statement { margin-top: 0.4rem; font-size: 0.9rem; }
 	.statement { display: flex; flex-direction: column; gap: 0.15rem; line-height: 1.5; color: var(--muted); }

@@ -15,8 +15,9 @@ npm install     # once
 npm run dev     # then open http://localhost:5173
 ```
 
-- **Stories** is the table: search, filter, sort, and set priority, value and effort in place.
-- **Board** shows the stories by priority; drag a card to another column to re-prioritize.
+- **Stories** is the table: search, filter, sort, and set statuses and RFCs in place.
+- **Board** (local only) shows the stories by priority; drag a card to another column to re-prioritize. Priority, value and effort live only here and in the TSV.
+- **Arena** shows two stories at a time; pick the one you prefer to build an Elo ranking (see below).
 - **Map** places similar stories close together, coloured by their status in a chosen version.
 - **Progress** shows, per spec version, the share of stories at each status; click a segment to list them.
 - Click a title for the full story, where you can edit or delete it.

@@ -14,6 +14,15 @@
 	const story = $derived(data.story);
 	const related = $derived(relatedTo(story, data.stories));
 	const knownRfcs = $derived([...new Set(data.stories.flatMap((s) => s.rfcs))].sort());
+	// Short version = first paragraph; the rest is the long version (often the original wording).
+	const parts = $derived.by(() => {
+		const [short, ...rest] = story.statement.split('\n\n');
+		const long = rest.join('\n\n');
+		const original = long.startsWith('Original: ');
+		return { short, long: original ? long.slice(10) : long, heading: original ? 'Original wording' : 'Details' };
+	});
+	// Lead words of "As a…, I want…, so that…" lines, shown in bold.
+	const lead = /^(As an?|I want|I need|I would like|so that|so)\b/i;
 	const describe = (name: string) => USER_CLASSES.find((c) => c.name === name)?.description;
 
 	function confirmDelete(event: SubmitEvent) {
@@ -45,7 +54,17 @@
 
 <div class="layout">
 	<article class="card">
-		<p class="statement"><Linkified text={story.statement} /></p>
+		<p class="statement">
+			{#each parts.short.split('\n') as line, i (i)}
+				{@const m = line.match(lead)}
+				<span>{#if m}<b>{m[0]}</b><Linkified text={line.slice(m[0].length)} />{:else}<Linkified text={line} />{/if}</span>
+			{/each}
+		</p>
+
+		{#if parts.long}
+			<h2>{parts.heading}</h2>
+			<p class="pre"><Linkified text={parts.long} /></p>
+		{/if}
 
 		{#if story.workaround}
 			<h2>{LABELS.workaround}</h2>
@@ -162,9 +181,18 @@
 		padding: 16px 20px;
 	}
 	.statement {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
 		margin: 0;
-		font-size: 15px;
-		white-space: pre-wrap;
+		padding: 4px 0 4px 14px;
+		border-left: 3px solid var(--accent);
+		font-size: 17px;
+		line-height: 1.5;
+	}
+	.statement b {
+		color: var(--accent);
+		font-weight: 600;
 	}
 	.pre {
 		white-space: pre-wrap;

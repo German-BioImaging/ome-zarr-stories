@@ -18,6 +18,7 @@
 	aria-label="{LABELS[field]} of {story.id}"
 	value={current}
 	onchange={change}
+	disabled={__STATIC__}
 	data-value={current}
 >
 	<option value="">–</option>
@@ -27,6 +28,11 @@
 </select>
 
 <style>
+	select:disabled {
+		opacity: 1;
+		cursor: default;
+		appearance: none;
+	}
 	select {
 		border-color: transparent;
 		background: transparent;

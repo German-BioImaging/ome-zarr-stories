@@ -1,8 +1,13 @@
-import adapter from '@sveltejs/adapter-node';
+import adapterNode from '@sveltejs/adapter-node';
+import adapterStatic from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 
+// STATIC=1 builds a read-only site (no editing) for GitHub Pages; BASE_PATH is the repo path, e.g. /ngff-stories.
+const STATIC = !!process.env.STATIC;
+
 export default defineConfig({
+	define: { __STATIC__: JSON.stringify(STATIC) },
 	plugins: [
 		sveltekit({
 			compilerOptions: {
@@ -10,7 +15,9 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter()
+			// strict: false — the editing routes are not prerendered and simply absent from the static site.
+			adapter: STATIC ? adapterStatic({ strict: false }) : adapterNode(),
+			paths: { base: (process.env.BASE_PATH ?? '') as '' | `/${string}` }
 		})
 	],
 	test: { include: ['src/**/*.test.ts'] }

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
 	import { page } from '$app/state';
 </script>
 
@@ -14,7 +16,7 @@
 		{/each}
 	</ul>
 {:else}
-	<p><a href="/">Back to the stories</a></p>
+	<p><a href="{base}/">Back to the stories</a></p>
 {/if}
 
 <style>

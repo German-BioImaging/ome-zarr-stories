@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
 	import { tick } from 'svelte';
 	import { patchStory } from '#lib/api.ts';
 	import type { Story } from '#lib/schema.ts';
@@ -34,14 +36,15 @@
 <span class="rfcs">
 	{#each story.rfcs as rfc (rfc)}
 		<span class="chip">
-			<a href="/?rfc={rfc}" title="All stories for {rfc}">{rfc}</a>
-			<button
+			<a href="{base}/?rfc={rfc}" title="All stories for {rfc}">{rfc}</a>
+			{#if !__STATIC__}<button
 				aria-label="Remove {rfc} from {story.id}"
 				onclick={() => save(story.rfcs.filter((other) => other !== rfc))}>×</button
-			>
+			>{/if}
 		</span>
 	{/each}
-	{#if adding}
+	{#if __STATIC__}<!-- read-only -->
+	{:else if adding}
 		<input
 			bind:this={input}
 			bind:value={draft}

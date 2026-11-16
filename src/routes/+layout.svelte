@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
 	import '../app.css';
 	import { refreshAll } from '$app/navigation';
 	import { page } from '$app/state';
@@ -9,10 +11,10 @@
 	let { children }: LayoutProps = $props();
 
 	const links = [
-		{ href: '/', label: 'Stories' },
-		{ href: '/board', label: 'Board' },
-		{ href: '/map', label: 'Map' },
-		{ href: '/progress', label: 'Progress' }
+		{ href: `${base}/`, label: 'Stories' },
+		{ href: `${base}/board`, label: 'Board' },
+		{ href: `${base}/map`, label: 'Map' },
+		{ href: `${base}/progress`, label: 'Progress' }
 	];
 </script>
 
@@ -21,19 +23,19 @@
 </svelte:head>
 
 <!-- Pick up changes made to the file outside the app (an editor, git pull) when coming back. -->
-<svelte:window onfocus={() => refreshAll()} />
+<svelte:window onfocus={() => __STATIC__ || refreshAll()} />
 
 <header>
-	<a class="brand" href="/">OME-Zarr user stories</a>
+	<a class="brand" href="{base}/">OME-Zarr user stories</a>
 	<nav aria-label="Views">
 		{#each links as link (link.href)}
-			<a href={link.href} aria-current={page.url.pathname === link.href ? 'page' : undefined}
+			<a href={link.href} aria-current={page.url.pathname === link.href || `${page.url.pathname}/` === link.href ? 'page' : undefined}
 				>{link.label}</a
 			>
 		{/each}
 	</nav>
 	<span class="notice" class:error={notice.error} role="status">{notice.text}</span>
-	<a class="button primary" href="/stories/new">+ Add story</a>
+	{#if !__STATIC__}<a class="button primary" href="{base}/stories/new">+ Add story</a>{/if}
 </header>
 
 <main>

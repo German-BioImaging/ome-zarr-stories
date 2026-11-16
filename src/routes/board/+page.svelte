@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
 	import { patchStory } from '#lib/api.ts';
 	import ScoreSelect from '#lib/components/ScoreSelect.svelte';
 	import { MOSCOW, score, type Story } from '#lib/schema.ts';
@@ -52,10 +54,10 @@
 			{#each column.stories as story (story.id)}
 				<article
 					class="card"
-					draggable="true"
+					draggable={!__STATIC__}
 					ondragstart={(e) => e.dataTransfer?.setData('text/plain', story.id)}
 				>
-					<a href="/stories/{story.id}" draggable="false">{story.title}</a>
+					<a href="{base}/stories/{story.id}" draggable="false">{story.title}</a>
 					<footer>
 						<span class="muted">{story.id}</span>
 						{#if score(story) !== null}

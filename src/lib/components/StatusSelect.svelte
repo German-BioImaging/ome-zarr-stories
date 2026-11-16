@@ -18,6 +18,7 @@
 	aria-label="Status in {version} of {story.id}"
 	value={current}
 	onchange={change}
+	disabled={__STATIC__}
 	title={statusDescription(current)}
 	style:--dot={statusColour(current)}
 >
@@ -27,6 +28,11 @@
 </select>
 
 <style>
+	select:disabled {
+		opacity: 1;
+		cursor: default;
+		appearance: none;
+	}
 	select {
 		appearance: none;
 		padding: 1px 22px 1px 20px;

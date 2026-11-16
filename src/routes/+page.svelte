@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
+	import { building } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import RfcEditor from '#lib/components/RfcEditor.svelte';
@@ -25,7 +28,8 @@
 
 	// Filters and sorting live in the address bar, so a view can be bookmarked or shared.
 	const NONE = 'none';
-	const param = (key: string) => page.url.searchParams.get(key) ?? '';
+	// Query strings are not available while prerendering the static site.
+	const param = (key: string) => (building ? '' : (page.url.searchParams.get(key) ?? ''));
 	const filters = $derived({
 		moscow: param('priority'),
 		status: param('status'),
@@ -256,7 +260,7 @@
 				<tr>
 					<td class="id">{story.id}</td>
 					<td class="story">
-						<a href="/stories/{story.id}">{story.title}</a>
+						<a href="{base}/stories/{story.id}">{story.title}</a>
 						<p class="muted">{story.statement}</p>
 						{#if story.user_classes.length}
 							<p class="classes">{story.user_classes.join(' · ')}</p>

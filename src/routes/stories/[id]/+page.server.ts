@@ -9,10 +9,13 @@ export const load: PageServerLoad = async ({ params }) => {
 	return { story, stories };
 };
 
-export const actions: Actions = {
-	delete: async ({ params }) => {
-		const result = await store.remove(params.id);
-		if (result.status === 'missing') error(404, `There is no ${params.id}`);
-		redirect(303, '/');
-	}
-};
+// No actions in the static build: pages with actions cannot be prerendered.
+export const actions: Actions | undefined = __STATIC__
+	? undefined
+	: {
+			delete: async ({ params }) => {
+				const result = await store.remove(params.id);
+				if (result.status === 'missing') error(404, `There is no ${params.id}`);
+				redirect(303, '/');
+			}
+		};

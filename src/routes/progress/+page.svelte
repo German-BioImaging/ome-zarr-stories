@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { SPEC_VERSIONS, STATUSES, statusColour, statusDescription, isSolved } from '#lib/schema.ts';
 	import type { PageProps } from './$types';
 
@@ -18,7 +19,7 @@
 	const total = $derived(data.stories.length);
 	const pct = (n: number) => `${((n / total) * 100).toFixed(2)}%`;
 	const link = (version: string, status: string) =>
-		`/?v=${encodeURIComponent(version)}&status=${encodeURIComponent(status)}`;
+		`${resolve('/')}?v=${encodeURIComponent(version)}&status=${encodeURIComponent(status)}`;
 </script>
 
 <svelte:head><title>Progress · OME-Zarr user stories</title></svelte:head>

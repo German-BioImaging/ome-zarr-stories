@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
 	import StoryForm from '#lib/components/StoryForm.svelte';
 	import type { PageProps } from './$types';
 
@@ -7,7 +9,7 @@
 
 <svelte:head><title>New story</title></svelte:head>
 
-<p class="crumbs"><a href="/">← All stories</a></p>
+<p class="crumbs"><a href="{base}/">← All stories</a></p>
 <h1>New story <span class="muted">{data.values.id}</span></h1>
 
 <div class="card">

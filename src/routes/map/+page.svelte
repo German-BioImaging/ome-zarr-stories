@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
+	import { building } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { LATEST_VERSION, SPEC_VERSIONS, STATUSES, statusColour as colour, statusDescription, type Story } from '#lib/schema.ts';
@@ -8,7 +11,7 @@
 
 	// Which version's assessment colours the dots; kept in the address bar like the table filters.
 	const version = $derived(
-		SPEC_VERSIONS.includes(page.url.searchParams.get('version') ?? '')
+		!building && SPEC_VERSIONS.includes(page.url.searchParams.get('version') ?? '')
 			? page.url.searchParams.get('version')!
 			: LATEST_VERSION
 	);
@@ -79,7 +82,7 @@
 			{@const story = byId.get(point.id)!}
 			{@const p = at.get(point.id)!}
 			<a
-				href="/stories/{story.id}"
+				href="{base}/stories/{story.id}"
 				aria-label="{story.id} {story.title}, {story.status[version]}"
 				class:faded={neighbours && !neighbours.has(story.id)}
 				onmouseenter={() => (hovered = story)}

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	const base = resolve('/').replace(/\/$/, ''); // '' locally, '/ngff-stories' on GitHub Pages
 	import { enhance } from '$app/forms';
 	import { patchStory } from '#lib/api.ts';
 	import RfcEditor from '#lib/components/RfcEditor.svelte';
@@ -24,19 +26,21 @@
 
 <svelte:head><title>{story.id} · {story.title}</title></svelte:head>
 
-<p class="crumbs"><a href="/">← All stories</a></p>
+<p class="crumbs"><a href="{base}/">← All stories</a></p>
 
 <header>
 	<div>
 		<p class="muted id">{story.id}</p>
 		<h1>{story.title}</h1>
 	</div>
+	{#if !__STATIC__}
 	<div class="actions">
-		<a class="button primary" href="/stories/{story.id}/edit">Edit</a>
+		<a class="button primary" href="{base}/stories/{story.id}/edit">Edit</a>
 		<form method="POST" action="?/delete" onsubmit={confirmDelete} use:enhance>
 			<button class="button danger">Delete</button>
 		</form>
 	</div>
+	{/if}
 </header>
 
 <div class="layout">
@@ -57,7 +61,7 @@
 			<h2>{LABELS.related}</h2>
 			<ul class="plain">
 				{#each related as other (other.id)}
-					<li><a href="/stories/{other.id}">{other.id}</a> {other.title}</li>
+					<li><a href="{base}/stories/{other.id}">{other.id}</a> {other.title}</li>
 				{/each}
 			</ul>
 		{/if}
@@ -98,13 +102,13 @@
 			<dt>{LABELS.user_classes}</dt>
 			<dd class="pad">
 				{#each story.user_classes as name (name)}
-					<a href="/?class={encodeURIComponent(name)}" title={describe(name)}>{name}</a><br />
+					<a href="{base}/?class={encodeURIComponent(name)}" title={describe(name)}>{name}</a><br />
 				{:else}–{/each}
 			</dd>
 			<dt>{LABELS.requested_by}</dt>
 			<dd class="pad">
 				{#each story.requested_by as name (name)}
-					<a href="/?by={encodeURIComponent(name)}">{name}</a>{' '}
+					<a href="{base}/?by={encodeURIComponent(name)}">{name}</a>{' '}
 				{:else}–{/each}
 			</dd>
 			<dt>{LABELS.origin}</dt>
@@ -116,7 +120,7 @@
 			<dt>{LABELS.reviewed}</dt>
 			<dd class="pad">
 				{story.reviewed || '–'}
-				{#if story.reviewed !== today()}
+				{#if !__STATIC__ && story.reviewed !== today()}
 					<button class="link" onclick={() => patchStory(story.id, { reviewed: today() })}
 						>Mark reviewed today</button
 					>

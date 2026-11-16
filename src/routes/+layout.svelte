@@ -12,7 +12,8 @@
 
 	const links = [
 		{ href: `${base}/`, label: 'Stories' },
-		...(__STATIC__ ? [] : [{ href: `${base}/board`, label: 'Board' }, { href: `${base}/arena`, label: 'Arena' }]),
+		...(__STATIC__ ? [] : [{ href: `${base}/board`, label: 'Board' }]),
+		{ href: `${base}/arena`, label: 'Arena' },
 		{ href: `${base}/map`, label: 'Map' },
 		{ href: `${base}/progress`, label: 'Progress' }
 	];

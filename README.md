@@ -33,7 +33,20 @@ Other commands:
 
 ## Story arena
 
-`/arena` shows two stories; pick the one you prefer, or skip. Each vote is appended to `arena-matches.tsv` (`winner, loser, at, class`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Votes made with a user-class filter feed that class's own ranking; votes without one feed the overall ranking. Cards show a story's short version (the first paragraph of `statement`); the rest is under "Full story". Local only, not in the static build.
+`/arena` shows two stories; pick the one you prefer, or skip. Each vote is appended to `arena-matches.tsv` (`winner, loser, at, class`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Votes made with a user-class filter feed that class's own ranking; votes without one feed the overall ranking. Cards show a story's short version (the first paragraph of `statement`); the rest is under "Full story". Locally, votes go straight into `arena-matches.tsv`; on the public site the arena is a demo (see below).
+
+### Voting in the arena
+
+The arena on the public site ranks stories from the votes in [`arena-matches.tsv`](arena-matches.tsv). Votes you make there are saved only in your browser. To add them to the public ranking:
+
+1. Vote at <https://lubianat.github.io/ngff-stories/arena>. Use the filters to vote within one user class; those votes feed that class's ranking.
+2. Click **Download my votes**. You get `my-arena-votes.tsv`, one vote per line: `winner, loser, time, class`.
+3. Send them in, either way:
+   - **Pull request:** append the lines to the end of `arena-matches.tsv` (no header) and open a PR.
+   - **Issue:** [open an issue](https://github.com/lubianat/ngff-stories/issues/new?title=Arena%20votes) and attach or paste the file.
+4. Once merged, the public ranking includes your votes. Click **Clear** in the arena to start a new batch.
+
+Votes are anonymous apart from your GitHub account on the PR or issue. Maintainers may drop votes that look automated.
 
 ## Read-only site (GitHub Pages)
 

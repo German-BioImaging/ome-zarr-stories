@@ -1,23 +1,40 @@
 import { fail } from "@sveltejs/kit";
 import { arena, pair, ratings } from "#lib/server/arena.ts";
 import { store } from "#lib/server/store.ts";
+import {
+  isSolved,
+  LATEST_VERSION,
+  SPEC_VERSIONS,
+  STATUSES,
+} from "#lib/schema.ts";
 import type { Actions, PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async () => {
-  const stories = await store.list();
+// Default: only stories the chosen version doesn't solve yet; '' = any status, or one exact status.
+export const load: PageServerLoad = async ({ url }) => {
+  const v = url.searchParams.get("v") ?? "";
+  const version = SPEC_VERSIONS.includes(v) ? v : LATEST_VERSION;
+  const s = url.searchParams.get("status") ?? "open";
+  const status = s === "" || s === "open" || STATUSES.includes(s) ? s : "open";
+  const keep = (st: string) =>
+    status === "open" ? !isSolved(st) : !status || st === status;
+
+  const all = await store.list();
   const matches = await arena.matches();
-  const rated = [
-    ...ratings(
-      stories.map((s) => s.id),
-      matches,
-    ).values(),
-  ];
-  const byId = new Map(stories.map((s) => [s.id, s]));
-  const [a, b] = pair(rated);
+  // Elo is always computed over every vote; the filter only narrows what is shown.
+  const rated = ratings(
+    all.map((x) => x.id),
+    matches,
+  );
+  const stories = all.filter((x) => keep(x.status[version]));
+  const byId = new Map(stories.map((x) => [x.id, x]));
+  const pool = stories.map((x) => rated.get(x.id)!);
+  const ids = pool.length >= 2 ? pair(pool) : null;
   return {
-    pair: [byId.get(a)!, byId.get(b)!],
-    ranking: rated
-      .toSorted((x, y) => y.elo - x.elo)
+    version,
+    status,
+    pair: ids ? ids.map((id) => byId.get(id)!) : [],
+    ranking: pool
+      .toSorted((a, b) => b.elo - a.elo)
       .map((r) => ({ ...r, title: byId.get(r.id)!.title })),
     total: matches.length,
   };

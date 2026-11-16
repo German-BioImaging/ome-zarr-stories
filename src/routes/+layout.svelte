@@ -12,7 +12,7 @@
 
 	const links = [
 		{ href: `${base}/`, label: 'Stories' },
-		{ href: `${base}/board`, label: 'Board' },
+		...(__STATIC__ ? [] : [{ href: `${base}/board`, label: 'Board' }]),
 		{ href: `${base}/map`, label: 'Map' },
 		{ href: `${base}/progress`, label: 'Progress' }
 	];

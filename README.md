@@ -34,7 +34,8 @@ Other commands:
 ## Read-only site (GitHub Pages)
 
 `npm run build:static` builds a browse-only copy into `build/`: the same views, with no adding, editing
-or deleting. Set `BASE_PATH` when it is served from a subfolder, e.g.
+or deleting, and without prioritization
+(priority, value, effort, score and the Board view), which is internal. Set `BASE_PATH` when it is served from a subfolder, e.g.
 `BASE_PATH=/ngff-stories npm run build:static`.
 
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) publishes it on every push to `main`. To

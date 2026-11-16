@@ -83,6 +83,7 @@
 
 	<aside class="card">
 		<dl>
+			{#if !__STATIC__}
 			<dt>{LABELS.moscow}</dt>
 			<dd><ScoreSelect {story} field="moscow" /></dd>
 			<dt>{LABELS.value}</dt>
@@ -91,6 +92,7 @@
 			<dd><ScoreSelect {story} field="effort" /></dd>
 			<dt>Score</dt>
 			<dd class="pad" title="Value ÷ effort">{score(story) ?? '–'}</dd>
+			{/if}
 
 			{#each SPEC_VERSIONS as version (version)}
 				<dt>{LABELS[statusColumn(version)]}</dt>

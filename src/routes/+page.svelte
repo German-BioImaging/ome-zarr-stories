@@ -31,7 +31,7 @@
 	// Query strings are not available while prerendering the static site.
 	const param = (key: string) => (building ? '' : (page.url.searchParams.get(key) ?? ''));
 	const filters = $derived({
-		moscow: param('priority'),
+		moscow: __STATIC__ ? '' : param('priority'),
 		status: param('status'),
 		userClass: param('class'),
 		rfc: param('rfc'),
@@ -77,10 +77,15 @@
 			label: v,
 			value: (s: Story) => STATUSES.indexOf(s.status[v])
 		})),
-		{ key: 'moscow', label: 'Priority', value: (s) => (s.moscow ? MOSCOW.indexOf(s.moscow) : null) },
-		{ key: 'value', label: 'Value', value: (s) => s.value },
-		{ key: 'effort', label: 'Effort', value: (s) => s.effort },
-		{ key: 'score', label: 'Score', value: score }
+		// Prioritization is internal: left out of the public static site.
+		...(__STATIC__
+			? []
+			: [
+					{ key: 'moscow', label: 'Priority', value: (s: Story) => (s.moscow ? MOSCOW.indexOf(s.moscow) : null) },
+					{ key: 'value', label: 'Value', value: (s: Story) => s.value },
+					{ key: 'effort', label: 'Effort', value: (s: Story) => s.effort },
+					{ key: 'score', label: 'Score', value: score }
+				])
 	]);
 
 	const visible = $derived.by(() => {
@@ -137,6 +142,7 @@
 />
 
 <section class="filters" aria-label="Filters">
+	{#if !__STATIC__}
 	<div class="chips">
 		<h2>Priority</h2>
 		{#each priorities as chip (chip.value)}
@@ -147,6 +153,7 @@
 			>
 		{/each}
 	</div>
+	{/if}
 	<div class="chips">
 		<h2>Status in</h2>
 		<div class="segmented" role="group" aria-label="Spec version">
@@ -271,10 +278,12 @@
 					{#each shownVersions as v (v)}
 						<td><StatusSelect {story} version={v} /></td>
 					{/each}
+					{#if !__STATIC__}
 					<td><ScoreSelect {story} field="moscow" /></td>
 					<td><ScoreSelect {story} field="value" /></td>
 					<td><ScoreSelect {story} field="effort" /></td>
 					<td class="score">{score(story) ?? ''}</td>
+					{/if}
 				</tr>
 			{:else}
 				<tr><td colspan={columns.length} class="muted empty">No stories match these filters.</td></tr>

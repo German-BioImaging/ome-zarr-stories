@@ -6,18 +6,15 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-
+	const submit = (e: Event & { currentTarget: HTMLSelectElement }) => e.currentTarget.form?.requestSubmit();
 </script>
 
-<header class="top">
-	<div>
-		<h1>Story arena</h1>
-		<p class="muted">Which user story do you prefer?</p>
-	</div>
+<div class="toolbar">
+	<h1>Story arena</h1>
 	<form class="filters">
 		<label
 			>Status
-			<select name="status" value={data.status} onchange={(e) => e.currentTarget.form?.requestSubmit()}>
+			<select name="status" value={data.status} onchange={submit}>
 				<option value="open">Not yet solved</option>
 				<option value="">Any</option>
 				{#each STATUSES as s (s)}<option value={s}>{s}</option>{/each}
@@ -25,47 +22,51 @@
 		>
 		<label
 			>in
-			<select name="v" value={data.version} onchange={(e) => e.currentTarget.form?.requestSubmit()}>
+			<select name="v" value={data.version} onchange={submit}>
 				{#each SPEC_VERSIONS as v (v)}<option value={v}>{v}</option>{/each}
 			</select></label
 		>
 	</form>
-</header>
+</div>
 
-{#if data.pair.length}
-	<div class="pair">
-		{#each data.pair as story, i (story.id)}
-			<form method="POST" use:enhance>
-				<input type="hidden" name="winner" value={story.id} />
-				<input type="hidden" name="loser" value={data.pair[1 - i].id} />
-				<button class="card" style:--c={statusColour(story.status[data.version])}>
-					<span class="meta">
-						<span>{story.id}</span>
-						<span class="status" style:--c={statusColour(story.status[data.version])}
-							>{story.status[data.version]}</span
-						>
-					</span>
-					<strong>{story.title}</strong>
-					<span class="statement">
-						{#each story.statement.split('\\n') as line, j (j)}<span>{line}</span>{/each}
-					</span>
-				</button>
-			</form>
-			{#if i === 0}<span class="vs" aria-hidden="true">or</span>{/if}
-		{/each}
-	</div>
-	<p class="muted center">
-		{data.total} comparisons so far · <a class="button" href="?{new URLSearchParams({ status: data.status, v: data.version })}">Skip</a>
-	</p>
-{:else}
-	<p class="muted">Fewer than two stories match this filter.</p>
-{/if}
+<section class="arena">
+	<h2 class="question">Which user story do you prefer?</h2>
+
+	{#if data.pair.length}
+		<div class="pair">
+			{#each data.pair as story, i (story.id)}
+				<form method="POST" use:enhance>
+					<input type="hidden" name="winner" value={story.id} />
+					<input type="hidden" name="loser" value={data.pair[1 - i].id} />
+					<button class="card">
+						<span class="meta">
+							<span>{story.id}</span>
+							<span class="status"
+								><i style:background={statusColour(story.status[data.version])}></i>{story.status[data.version]}</span
+							>
+						</span>
+						<strong>{story.title}</strong>
+						<span class="statement">
+							{#each story.statement.split('\\n') as line, j (j)}<span>{line}</span>{/each}
+						</span>
+					</button>
+				</form>
+			{/each}
+		</div>
+		<div class="footer">
+			<a class="button" href="?{new URLSearchParams({ status: data.status, v: data.version })}">Skip</a>
+			<span class="muted">{data.total} comparisons so far</span>
+		</div>
+	{:else}
+		<p class="muted">Fewer than two stories match this filter.</p>
+	{/if}
+</section>
 
 <details>
 	<summary>Ranking ({data.ranking.length} stories)</summary>
 	<ol class="ranking">
 		{#each data.ranking as r (r.id)}
-			<li style:--c={statusColour(data.statuses[r.id])}>
+			<li>
 				<a href="{base}/stories/{r.id}">{r.id}</a>
 				<span>{r.title}</span>
 				<span class="muted num">{Math.round(r.elo)} · {r.games}</span>
@@ -75,32 +76,34 @@
 </details>
 
 <style>
-	.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem; }
-	.top h1 { margin-bottom: 0.25rem; }
+	.toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+	.toolbar h1 { margin: 0; font-size: 1.25rem; }
+	.filters { display: flex; gap: 0.5rem; }
+	.filters label { display: flex; gap: 0.4rem; align-items: center; color: var(--muted); font-size: 0.9rem; }
 	.muted { color: var(--muted); }
-	.center { text-align: center; }
-	.filters { display: flex; gap: 0.5rem; align-items: center; }
-	.filters label { display: flex; gap: 0.4rem; align-items: center; color: var(--muted); }
-	.pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; margin: 1.5rem 0 0.5rem; }
-	.vs { align-self: center; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-weight: 600; }
+
+	.arena { max-width: 60rem; margin: 2.5rem auto 2rem; }
+	.question { text-align: center; font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 1.75rem; }
+	.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 	.card {
-		display: flex; flex-direction: column; gap: 0.6rem; width: 100%; height: 100%;
-		text-align: left; padding: 1.25rem; cursor: pointer; font: inherit; color: var(--text);
-		background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
-		transition: border-color 0.15s, transform 0.15s;
+		display: flex; flex-direction: column; gap: 0.75rem; width: 100%; height: 100%;
+		text-align: left; padding: 1.5rem; cursor: pointer; font: inherit; color: var(--text);
+		background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+		transition: border-color 0.15s, box-shadow 0.15s;
 	}
-	.card { border-top: 4px solid var(--c); background: linear-gradient(color-mix(in srgb, var(--c) 10%, var(--surface)), var(--surface) 40%); }
-	.card:hover, .card:focus-visible { border-color: var(--c); border-top-width: 4px; transform: translateY(-2px); box-shadow: 0 6px 18px color-mix(in srgb, var(--c) 25%, transparent); }
-	.card strong { font-size: 1.1rem; }
-	.meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.85rem; }
-	.status { color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); padding: 0 0.5rem; border-radius: 999px; font-weight: 600; }
-	.ranking li { border-left: 3px solid var(--c); padding-left: 0.5rem !important; }
-	.ranking li:nth-child(-n + 3) a { font-weight: 700; color: var(--accent); }
-	.statement { display: flex; flex-direction: column; gap: 0.2rem; line-height: 1.45; }
+	.card:hover, .card:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); outline: none; }
+	.card strong { font-size: 1.1rem; line-height: 1.35; }
+	.meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.8rem; }
+	.status { display: inline-flex; align-items: center; gap: 0.4rem; }
+	.status i { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+	.statement { display: flex; flex-direction: column; gap: 0.15rem; line-height: 1.5; color: var(--muted); }
+	.footer { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1.5rem; font-size: 0.85rem; }
+
 	.ranking { padding-left: 2rem; }
 	.ranking li { display: grid; grid-template-columns: 6rem 1fr auto; gap: 0.75rem; padding: 0.2rem 0; }
 	.num { font-variant-numeric: tabular-nums; }
 	@media (max-width: 640px) {
 		.pair { grid-template-columns: 1fr; }
+		.question { font-size: 1.3rem; }
 	}
 </style>

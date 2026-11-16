@@ -8,7 +8,7 @@
 </script>
 
 <h1>Story arena</h1>
-<p>Which story matters more? {data.total} matches so far.</p>
+<p>Every story here is a real need. If the spec could address only one of these two next, which would have the wider impact? {data.total} comparisons so far.</p>
 
 <div class="pair">
 	{#each data.pair as story, i (story.id)}

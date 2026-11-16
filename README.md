@@ -31,6 +31,10 @@ Other commands:
 | `npm run check` | Type-checks the code |
 | `npm run build && npm start` | Runs the built app instead of the development server |
 
+## Story arena
+
+`/arena` shows two stories; click the one that matters more. Each vote is appended to `arena-matches.tsv` (`winner, loser, at`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Local only, not in the static build.
+
 ## Read-only site (GitHub Pages)
 
 `npm run build:static` builds a browse-only copy into `build/`: the same views, with no adding, editing

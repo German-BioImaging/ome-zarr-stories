@@ -38,7 +38,7 @@
 			<form method="POST" use:enhance>
 				<input type="hidden" name="winner" value={story.id} />
 				<input type="hidden" name="loser" value={data.pair[1 - i].id} />
-				<button class="card">
+				<button class="card" style:--c={statusColour(story.status[data.version])}>
 					<span class="meta">
 						<span>{story.id}</span>
 						<span class="status" style:--c={statusColour(story.status[data.version])}
@@ -65,7 +65,7 @@
 	<summary>Ranking ({data.ranking.length} stories)</summary>
 	<ol class="ranking">
 		{#each data.ranking as r (r.id)}
-			<li>
+			<li style:--c={statusColour(data.statuses[r.id])}>
 				<a href="{base}/stories/{r.id}">{r.id}</a>
 				<span>{r.title}</span>
 				<span class="muted num">{Math.round(r.elo)} · {r.games}</span>
@@ -82,17 +82,20 @@
 	.filters { display: flex; gap: 0.5rem; align-items: center; }
 	.filters label { display: flex; gap: 0.4rem; align-items: center; color: var(--muted); }
 	.pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; margin: 1.5rem 0 0.5rem; }
-	.vs { align-self: center; color: var(--muted); font-style: italic; }
+	.vs { align-self: center; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-weight: 600; }
 	.card {
 		display: flex; flex-direction: column; gap: 0.6rem; width: 100%; height: 100%;
 		text-align: left; padding: 1.25rem; cursor: pointer; font: inherit; color: var(--text);
 		background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
 		transition: border-color 0.15s, transform 0.15s;
 	}
-	.card:hover, .card:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
+	.card { border-top: 4px solid var(--c); background: linear-gradient(color-mix(in srgb, var(--c) 10%, var(--surface)), var(--surface) 40%); }
+	.card:hover, .card:focus-visible { border-color: var(--c); border-top-width: 4px; transform: translateY(-2px); box-shadow: 0 6px 18px color-mix(in srgb, var(--c) 25%, transparent); }
 	.card strong { font-size: 1.1rem; }
 	.meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.85rem; }
-	.status { color: var(--c); }
+	.status { color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); padding: 0 0.5rem; border-radius: 999px; font-weight: 600; }
+	.ranking li { border-left: 3px solid var(--c); padding-left: 0.5rem !important; }
+	.ranking li:nth-child(-n + 3) a { font-weight: 700; color: var(--accent); }
 	.statement { display: flex; flex-direction: column; gap: 0.2rem; line-height: 1.45; }
 	.ranking { padding-left: 2rem; }
 	.ranking li { display: grid; grid-template-columns: 6rem 1fr auto; gap: 0.75rem; padding: 0.2rem 0; }

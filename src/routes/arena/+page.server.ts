@@ -36,6 +36,7 @@ export const load: PageServerLoad = async ({ url }) => {
     ranking: pool
       .toSorted((a, b) => b.elo - a.elo)
       .map((r) => ({ ...r, title: byId.get(r.id)!.title })),
+    statuses: Object.fromEntries(stories.map((x) => [x.id, x.status[version]])),
     total: matches.length,
   };
 };

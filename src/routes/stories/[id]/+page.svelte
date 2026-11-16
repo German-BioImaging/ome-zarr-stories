@@ -185,13 +185,10 @@
 		flex-direction: column;
 		gap: 4px;
 		margin: 0;
-		padding: 4px 0 4px 14px;
-		border-left: 3px solid var(--accent);
-		font-size: 17px;
+		font-size: 16px;
 		line-height: 1.5;
 	}
 	.statement b {
-		color: var(--accent);
 		font-weight: 600;
 	}
 	.pre {

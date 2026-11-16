@@ -31,6 +31,15 @@ Other commands:
 | `npm run check` | Type-checks the code |
 | `npm run build && npm start` | Runs the built app instead of the development server |
 
+## Read-only site (GitHub Pages)
+
+`npm run build:static` builds a browse-only copy into `build/`: the same views, with no adding, editing
+or deleting. Set `BASE_PATH` when it is served from a subfolder, e.g.
+`BASE_PATH=/ngff-stories npm run build:static`.
+
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml) publishes it on every push to `main`. To
+turn it on once, choose Settings → Pages → Source: "GitHub Actions" in the repository.
+
 ## The data
 
 `user-stories.tsv` is tab-separated with a header row and these columns, in this order:

@@ -6,16 +6,13 @@
 	import { page } from '$app/state';
 	import RfcEditor from '#lib/components/RfcEditor.svelte';
 	import StatusSelect from '#lib/components/StatusSelect.svelte';
-	import ScoreSelect from '#lib/components/ScoreSelect.svelte';
 	import {
 		LABELS,
 		LATEST_VERSION,
-		MOSCOW,
 		SPEC_VERSIONS,
 		STATUSES,
 		TABLE_VERSIONS,
 		USER_CLASSES,
-		score,
 		statusColumn,
 		statusColour,
 		statusDescription,
@@ -31,7 +28,6 @@
 	// Query strings are not available while prerendering the static site.
 	const param = (key: string) => (building ? '' : (page.url.searchParams.get(key) ?? ''));
 	const filters = $derived({
-		moscow: __STATIC__ ? '' : param('priority'),
 		status: param('status'),
 		userClass: param('class'),
 		rfc: param('rfc'),
@@ -76,16 +72,7 @@
 			key: statusColumn(v),
 			label: v,
 			value: (s: Story) => STATUSES.indexOf(s.status[v])
-		})),
-		// Prioritization is internal: left out of the public static site.
-		...(__STATIC__
-			? []
-			: [
-					{ key: 'moscow', label: 'Priority', value: (s: Story) => (s.moscow ? MOSCOW.indexOf(s.moscow) : null) },
-					{ key: 'value', label: 'Value', value: (s: Story) => s.value },
-					{ key: 'effort', label: 'Effort', value: (s: Story) => s.effort },
-					{ key: 'score', label: 'Score', value: score }
-				])
+		}))
 	]);
 
 	const visible = $derived.by(() => {
@@ -95,7 +82,6 @@
 		return data.stories
 			.filter(
 				(s) =>
-					(!filters.moscow || (filters.moscow === NONE ? !s.moscow : s.moscow === filters.moscow)) &&
 					(!filters.status || s.status[version] === filters.status) &&
 					(!filters.userClass ||
 						(filters.userClass === NONE
@@ -118,10 +104,6 @@
 	});
 
 	const count = (test: (s: Story) => boolean) => data.stories.filter(test).length;
-	const priorities = $derived([
-		...MOSCOW.map((m) => ({ value: m, label: m, n: count((s) => s.moscow === m) })),
-		{ value: NONE, label: 'Not prioritized', n: count((s) => !s.moscow) }
-	]);
 	const statuses = $derived(
 		STATUSES.map((status) => ({ value: status, n: count((s) => s.status[version] === status) }))
 	);
@@ -142,18 +124,6 @@
 />
 
 <section class="filters" aria-label="Filters">
-	{#if !__STATIC__}
-	<div class="chips">
-		<h2>Priority</h2>
-		{#each priorities as chip (chip.value)}
-			<button
-				class="chip"
-				aria-pressed={filters.moscow === chip.value}
-				onclick={() => toggle('priority', chip.value)}>{chip.label} <b>{chip.n}</b></button
-			>
-		{/each}
-	</div>
-	{/if}
 	<div class="chips">
 		<h2>Status in</h2>
 		<div class="segmented" role="group" aria-label="Spec version">
@@ -278,12 +248,6 @@
 					{#each shownVersions as v (v)}
 						<td><StatusSelect {story} version={v} /></td>
 					{/each}
-					{#if !__STATIC__}
-					<td><ScoreSelect {story} field="moscow" /></td>
-					<td><ScoreSelect {story} field="value" /></td>
-					<td><ScoreSelect {story} field="effort" /></td>
-					<td class="score">{score(story) ?? ''}</td>
-					{/if}
 				</tr>
 			{:else}
 				<tr><td colspan={columns.length} class="muted empty">No stories match these filters.</td></tr>
@@ -450,11 +414,6 @@
 	.classes {
 		font-size: 12px !important;
 		color: var(--accent);
-	}
-	.score {
-		font-variant-numeric: tabular-nums;
-		font-weight: 600;
-		padding-top: 11px;
 	}
 	.empty {
 		padding: 32px;

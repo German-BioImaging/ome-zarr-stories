@@ -53,6 +53,13 @@
 				{#each SPEC_VERSIONS as v (v)}<option value={v}>{v}</option>{/each}
 			</select></label
 		>
+		<label
+			>User class
+			<select name="class" value={data.cls} onchange={submit}>
+				<option value="">Any</option>
+				{#each data.classes as c (c)}<option value={c}>{c}</option>{/each}
+			</select></label
+		>
 	</form>
 </div>
 
@@ -88,7 +95,7 @@
 			{/each}
 		</div>
 		<div class="footer">
-			<a class="button" bind:this={skip} href="?{new URLSearchParams({ status: data.status, v: data.version })}">Skip <kbd>↓</kbd></a>
+			<a class="button" bind:this={skip} href="?{new URLSearchParams({ status: data.status, v: data.version, class: data.cls })}">Skip <kbd>↓</kbd></a>
 			<span class="muted">{data.total} comparisons so far · keys: <kbd>←</kbd>/<kbd>→</kbd> select, <kbd>Enter</kbd> confirm, <kbd>Esc</kbd> clear, <kbd>↓</kbd> or <kbd>S</kbd> skip</span>
 		</div>
 	{:else}

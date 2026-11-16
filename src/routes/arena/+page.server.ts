@@ -18,20 +18,26 @@ export const load: PageServerLoad = async ({ url }) => {
   const keep = (st: string) =>
     status === "open" ? !isSolved(st) : !status || st === status;
 
+  const cls = url.searchParams.get("class") ?? "";
   const all = await store.list();
+  const classes = [...new Set(all.flatMap((x) => x.user_classes))].sort();
   const matches = await arena.matches();
   // Elo is always computed over every vote; the filter only narrows what is shown.
   const rated = ratings(
     all.map((x) => x.id),
     matches,
   );
-  const stories = all.filter((x) => keep(x.status[version]));
+  const stories = all.filter(
+    (x) => keep(x.status[version]) && (!cls || x.user_classes.includes(cls)),
+  );
   const byId = new Map(stories.map((x) => [x.id, x]));
   const pool = stories.map((x) => rated.get(x.id)!);
   const ids = pool.length >= 2 ? pair(pool) : null;
   return {
     version,
     status,
+    cls,
+    classes,
     pair: ids ? ids.map((id) => byId.get(id)!) : [],
     ranking: pool
       .toSorted((a, b) => b.elo - a.elo)

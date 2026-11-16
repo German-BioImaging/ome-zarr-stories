@@ -6,8 +6,7 @@
 	import RfcEditor from '#lib/components/RfcEditor.svelte';
 	import StatusSelect from '#lib/components/StatusSelect.svelte';
 	import Linkified from '#lib/components/Linkified.svelte';
-	import ScoreSelect from '#lib/components/ScoreSelect.svelte';
-	import { LABELS, SPEC_VERSIONS, USER_CLASSES, relatedTo, score, statusColumn, today } from '#lib/schema.ts';
+	import { LABELS, SPEC_VERSIONS, USER_CLASSES, relatedTo, statusColumn, today } from '#lib/schema.ts';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -102,17 +101,6 @@
 
 	<aside class="card">
 		<dl>
-			{#if !__STATIC__}
-			<dt>{LABELS.moscow}</dt>
-			<dd><ScoreSelect {story} field="moscow" /></dd>
-			<dt>{LABELS.value}</dt>
-			<dd><ScoreSelect {story} field="value" /></dd>
-			<dt>{LABELS.effort}</dt>
-			<dd><ScoreSelect {story} field="effort" /></dd>
-			<dt>Score</dt>
-			<dd class="pad" title="Value ÷ effort">{score(story) ?? '–'}</dd>
-			{/if}
-
 			{#each SPEC_VERSIONS as version (version)}
 				<dt>{LABELS[statusColumn(version)]}</dt>
 				<dd><StatusSelect {story} {version} /></dd>

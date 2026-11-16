@@ -17,7 +17,7 @@ None of these is in the TSV yet. To promote one, give it the next `STORY-NNN` an
 
 ## Acquisition and data lifecycle
 
-7. **Live and growing datasets.** Append timepoints or tiles while acquiring. Readers should be able to tell that the data is still being written, and how far it has got.
+7. **Live and growing datasets.** (Partly covered by STORY-105, writing from acquisition software; the "still being written" signal is still open.) Append timepoints or tiles while acquiring. Readers should be able to tell that the data is still being written, and how far it has got.
 8. **Not acquired vs zero.** Mark chunks or regions that were never imaged (sparse tiling, failed tiles), so they are not confused with real zeros or `fill_value`.
 9. **Image extent changing over time.** Support a growing embryo or an adaptive field of view, where each timepoint has its own extent. This was the motivation behind ngff#264. Today it means separate images placed in a scene.
 10. **Label pyramid downsampling.** Declare that label levels were made by nearest-neighbour or majority-vote downsampling, so tools do not average label IDs.
@@ -27,7 +27,7 @@ None of these is in the TSV yet. To promote one, give it the next `STORY-NNN` an
 11. **Single-file OME-Zarr.** Package a dataset as one zip (`.ozx`) for email, upload and desktop use (ngff#398).
 12. **Fast detection.** Tell from one small read that a store is OME-Zarr, and which version and parts it uses (ngff#228, ngff#644 zarr-conventions).
 13. **Thumbnails for catalogues.** Include a small preview image for repository listings and galleries. This goes beyond the plate overview in STORY-087.
-14. **Integrity and versioning.** Provide checksums or a manifest, so archives can verify a copy and record edits to a published dataset.
+14. **Integrity and versioning.** (Versioning is now STORY-103; checksums are still open.) Provide checksums or a manifest, so archives can verify a copy and record edits to a published dataset.
 
 ## Medical and quantitative
 

@@ -69,6 +69,8 @@
 	{#if data.pair.length}
 		<div class="pair">
 			{#each data.pair as story, i (story.id)}
+				<!-- Short version = first paragraph; the rest is behind "Full story". -->
+				{@const [short, ...rest] = story.statement.split('\n\n')}
 				<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 				<div class="card" class:selected={selected === i} onclick={() => (selected = i)}>
 					<span class="meta">
@@ -79,8 +81,16 @@
 					</span>
 					<strong>{story.title}</strong>
 					<span class="statement">
-						{#each story.statement.split('\\n') as line, j (j)}<span>{line}</span>{/each}
+						{#each short.split('\n') as line, j (j)}<span>{line}</span>{/each}
 					</span>
+					{#if rest.length}
+						<details class="more">
+							<summary>Full story</summary>
+							<span class="statement">
+								{#each rest.join('\n\n').split('\n') as line, j (j)}<span>{line}</span>{/each}
+							</span>
+						</details>
+					{/if}
 					<form method="POST" use:enhance bind:this={forms[i]} class="choose">
 						<input type="hidden" name="winner" value={story.id} />
 						<input type="hidden" name="loser" value={data.pair[1 - i].id} />
@@ -139,6 +149,8 @@
 	.meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.8rem; }
 	.status { display: inline-flex; align-items: center; gap: 0.4rem; }
 	.status i { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+	.more summary { cursor: pointer; font-size: 0.85rem; color: var(--muted); }
+	.more .statement { margin-top: 0.4rem; font-size: 0.9rem; }
 	.statement { display: flex; flex-direction: column; gap: 0.15rem; line-height: 1.5; color: var(--muted); }
 	kbd { display: inline-block; min-width: 1.4em; padding: 0 0.3em; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; font: inherit; font-size: 0.8rem; text-align: center; background: var(--bg); color: var(--text); }
 	.footer { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1.5rem; font-size: 0.85rem; }

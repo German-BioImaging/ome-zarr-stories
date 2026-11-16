@@ -8,7 +8,7 @@
 	import type { PageProps } from './$types';
 
 	const base = resolve('/').replace(/\/$/, '');
-	const GUIDE = 'https://github.com/lubianat/ngff-stories#voting-in-the-arena';
+	const GUIDE = 'https://github.com/German-BioImaging/ome-zarr-stories#voting-in-the-arena';
 	// Lead words of "As a…, I want…, so that…" lines, shown in bold (as on the story page).
 	const lead = /^(As an?|I want|I need|I would like|so that|so)\b/i;
 

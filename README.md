@@ -40,11 +40,11 @@ Other commands:
 
 The arena on the public site ranks stories from the votes in [`arena-matches.tsv`](arena-matches.tsv). Votes you make there are saved only in your browser. To add them to the public ranking:
 
-1. Vote at <https://lubianat.github.io/ngff-stories/arena>. Use the filters to vote within one user class; those votes feed that class's ranking.
+1. Vote at <https://german-bioimaging.github.io/ome-zarr-stories/arena>. Use the filters to vote within one user class; those votes feed that class's ranking.
 2. Click **Download my votes**. You get `my-arena-votes.tsv`, one vote per line: `winner, loser, time, class`.
 3. Send them in, either way:
    - **Pull request:** append the lines to the end of `arena-matches.tsv` (no header) and open a PR.
-   - **Issue:** [open an issue](https://github.com/lubianat/ngff-stories/issues/new?title=Arena%20votes) and attach or paste the file.
+   - **Issue:** [open an issue](https://github.com/German-BioImaging/ome-zarr-stories/issues/new?title=Arena%20votes) and attach or paste the file.
 4. Once merged, the public ranking includes your votes. Click **Clear** in the arena to start a new batch.
 
 Votes are anonymous apart from your GitHub account on the PR or issue. Maintainers may drop votes that look automated.

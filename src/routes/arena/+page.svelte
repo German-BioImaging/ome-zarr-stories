@@ -84,6 +84,7 @@
 					<form method="POST" use:enhance bind:this={forms[i]} class="choose">
 						<input type="hidden" name="winner" value={story.id} />
 						<input type="hidden" name="loser" value={data.pair[1 - i].id} />
+						<input type="hidden" name="class" value={data.cls} />
 						<button class="button" class:primary={selected === i}>Choose this story</button>
 						<span class="muted"
 							>{#if selected === i}<kbd>Enter</kbd> to confirm{:else}or <kbd>{i === 0 ? '←' : '→'}</kbd>, then <kbd
@@ -96,7 +97,7 @@
 		</div>
 		<div class="footer">
 			<a class="button" bind:this={skip} href="?{new URLSearchParams({ status: data.status, v: data.version, class: data.cls })}">Skip <kbd>↓</kbd></a>
-			<span class="muted">{data.total} comparisons so far · keys: <kbd>←</kbd>/<kbd>→</kbd> select, <kbd>Enter</kbd> confirm, <kbd>Esc</kbd> clear, <kbd>↓</kbd> or <kbd>S</kbd> skip</span>
+			<span class="muted">{data.total} comparisons in {data.cls || 'the overall ranking'} · keys: <kbd>←</kbd>/<kbd>→</kbd> select, <kbd>Enter</kbd> confirm, <kbd>Esc</kbd> clear, <kbd>↓</kbd> or <kbd>S</kbd> skip</span>
 		</div>
 	{:else}
 		<p class="muted">Fewer than two stories match this filter.</p>
@@ -104,7 +105,7 @@
 </section>
 
 <details>
-	<summary>Ranking ({data.ranking.length} stories)</summary>
+	<summary>Ranking: {data.cls || 'overall'} ({data.ranking.length} stories)</summary>
 	<ol class="ranking">
 		{#each data.ranking as r (r.id)}
 			<li>

@@ -33,7 +33,7 @@ Other commands:
 
 ## Story arena
 
-`/arena` shows two stories; pick the one you prefer, or skip. Each vote is appended to `arena-matches.tsv` (`winner, loser, at`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Local only, not in the static build.
+`/arena` shows two stories; pick the one you prefer, or skip. Each vote is appended to `arena-matches.tsv` (`winner, loser, at, class`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Votes made with a user-class filter feed that class's own ranking; votes without one feed the overall ranking. Local only, not in the static build.
 
 ## Read-only site (GitHub Pages)
 

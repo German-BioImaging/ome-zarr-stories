@@ -21,7 +21,8 @@ export const load: PageServerLoad = async ({ url }) => {
   const cls = url.searchParams.get("class") ?? "";
   const all = await store.list();
   const classes = [...new Set(all.flatMap((x) => x.user_classes))].sort();
-  const matches = await arena.matches();
+  // Each user class has its own ranking; votes without a class form the overall one.
+  const matches = (await arena.matches()).filter((m) => m.cls === cls);
   // Elo is always computed over every vote; the filter only narrows what is shown.
   const rated = ratings(
     all.map((x) => x.id),
@@ -53,9 +54,13 @@ export const actions: Actions | undefined = __STATIC__
         const form = await request.formData();
         const winner = String(form.get("winner") ?? "");
         const loser = String(form.get("loser") ?? "");
-        const ids = new Set((await store.list()).map((s) => s.id));
-        if (!ids.has(winner) || !ids.has(loser) || winner === loser)
+        const cls = String(form.get("class") ?? "");
+        const byId = new Map((await store.list()).map((s) => [s.id, s]));
+        const w = byId.get(winner),
+          l = byId.get(loser);
+        if (!w || !l || winner === loser) return fail(400);
+        if (cls && !(w.user_classes.includes(cls) && l.user_classes.includes(cls)))
           return fail(400);
-        await arena.record(winner, loser);
+        await arena.record(winner, loser, cls);
       },
     };

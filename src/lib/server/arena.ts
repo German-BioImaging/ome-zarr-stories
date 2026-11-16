@@ -2,7 +2,8 @@
 import { appendFile, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export type Match = { winner: string; loser: string; at: string };
+// cls: the user class the vote was made in; "" = overall ranking.
+export type Match = { winner: string; loser: string; at: string; cls?: string };
 export type Rating = { id: string; elo: number; games: number };
 
 const K = 32;
@@ -58,16 +59,16 @@ export function createArena(path: string) {
         .slice(1)
         .filter(Boolean)
         .map((line) => {
-          const [winner, loser, at] = line.split("\t");
-          return { winner, loser, at };
+          const [winner, loser, at, cls = ""] = line.split("\t");
+          return { winner, loser, at, cls };
         });
     },
-    async record(winner: string, loser: string) {
+    async record(winner: string, loser: string, cls = "") {
       const text = await readFile(path, "utf-8").catch(() => "");
-      const header = text ? "" : "winner\tloser\tat\n";
+      const header = text ? "" : "winner\tloser\tat\tclass\n";
       await appendFile(
         path,
-        `${header}${winner}\t${loser}\t${new Date().toISOString()}\n`,
+        `${header}${winner}\t${loser}\t${new Date().toISOString()}\t${cls}\n`,
         "utf-8",
       );
     },

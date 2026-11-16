@@ -6,8 +6,18 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+	let forms: HTMLFormElement[] = $state([]);
+	let skip: HTMLAnchorElement | undefined = $state();
+	// ← / → pick a side, ↓ or S skips; ignored while typing or choosing in a filter.
+	function key(e: KeyboardEvent) {
+		if (e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, select, textarea')) return;
+		const action = { ArrowLeft: () => forms[0]?.requestSubmit(), ArrowRight: () => forms[1]?.requestSubmit(), ArrowDown: () => skip?.click(), s: () => skip?.click() }[e.key];
+		if (action) { e.preventDefault(); action(); }
+	}
 	const submit = (e: Event & { currentTarget: HTMLSelectElement }) => e.currentTarget.form?.requestSubmit();
 </script>
+
+<svelte:window onkeydown={key} />
 
 <div class="toolbar">
 	<h1>Story arena</h1>
@@ -35,7 +45,7 @@
 	{#if data.pair.length}
 		<div class="pair">
 			{#each data.pair as story, i (story.id)}
-				<form method="POST" use:enhance>
+				<form method="POST" use:enhance bind:this={forms[i]}>
 					<input type="hidden" name="winner" value={story.id} />
 					<input type="hidden" name="loser" value={data.pair[1 - i].id} />
 					<button class="card">
@@ -49,13 +59,14 @@
 						<span class="statement">
 							{#each story.statement.split('\\n') as line, j (j)}<span>{line}</span>{/each}
 						</span>
+						<span class="hint"><kbd>{i === 0 ? '←' : '→'}</kbd> to choose</span>
 					</button>
 				</form>
 			{/each}
 		</div>
 		<div class="footer">
-			<a class="button" href="?{new URLSearchParams({ status: data.status, v: data.version })}">Skip</a>
-			<span class="muted">{data.total} comparisons so far</span>
+			<a class="button" bind:this={skip} href="?{new URLSearchParams({ status: data.status, v: data.version })}">Skip <kbd>↓</kbd></a>
+			<span class="muted">{data.total} comparisons so far · keys: <kbd>←</kbd> left, <kbd>→</kbd> right, <kbd>↓</kbd> or <kbd>S</kbd> skip</span>
 		</div>
 	{:else}
 		<p class="muted">Fewer than two stories match this filter.</p>
@@ -97,6 +108,8 @@
 	.status { display: inline-flex; align-items: center; gap: 0.4rem; }
 	.status i { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
 	.statement { display: flex; flex-direction: column; gap: 0.15rem; line-height: 1.5; color: var(--muted); }
+	.hint { margin-top: auto; padding-top: 0.5rem; font-size: 0.8rem; color: var(--muted); }
+	kbd { display: inline-block; min-width: 1.4em; padding: 0 0.3em; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; font: inherit; font-size: 0.8rem; text-align: center; background: var(--bg); color: var(--text); }
 	.footer { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1.5rem; font-size: 0.85rem; }
 
 	.ranking { padding-left: 2rem; }

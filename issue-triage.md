@@ -43,3 +43,18 @@ Title triage is coarse. Reason tags come from keywords, and the verdicts come fr
 
 ## ome-zarr-ideas (2026-11-16)
 Same protocol, applied to german-BioImaging/ome-zarr-ideas (143 issues) and saved to `issue-triage-ome-zarr-ideas.tsv`. Most issues are outreach, datasets or tooling ideas. About 20 spec-related issues were read in full: 8 became new stories (STORY-114..121), and 12 were added as sources to existing stories. Extra `no-story` reasons: `dataset-conversion`, `docs-outreach-process`, `tooling-infra`.
+
+## image.sc forum (#ome-ngff, #ome-zarr), 2026-11-22
+- Source: `forum-scrape/scrape.py` (logged-in Playwright session) → `forum-scrape/index.tsv` + `cache/{id}.md` (cache not committed). 391 topics.
+- Verdicts in `forum-triage.tsv`, same scheme as above. Extra `no-story` reasons: `announcement-process` (calls, events, releases, jobs), `tool-support` (how-to and bug threads), `discussion-or-tooling` (read in the deep pass, no spec need).
+- Title triage, then a phrase search (`we need`, `use case`, `workaround`, …) over every `no-story` thread to catch needs hidden in support questions. Deep pass read the first post plus matching sentences from replies.
+- Second pass: phrase search over all `no-story` threads (support and announcement threads), plus full reads of the long threads 66794, 111380 and 91705. The 169-post weekly dev update thread (110810) was only phrase-searched.
+- Forum notes in `user-stories.tsv` are prefixed `Forum (<topic id>):`.
+- Third pass: full reads of the Zurich 2026 hackathon posts, the 2021–2022 community-call threads (48386, 55333, 60885) and the whole weekly dev thread (110810). Untagged threads linked from tagged ones were fetched with `scrape.py <ids>` (18 kept, 37 skipped as off-topic); they are in `index.tsv` and `forum-triage.tsv` (`linked-untagged` when no story).
+
+## Zulip NGFF channel, 2026-11-23
+
+- Source: `zulip-scrape/scrape.py` (Playwright, the user's own login; only channel 328251 is requested and any other message aborts the run) → `zulip-scrape/index.tsv` + `cache/` (cache and session not committed). 183 topics, 3,158 messages, 2021-03 to 2026-11.
+- Verdicts in `zulip-triage.tsv` (topic, messages, verdict, reason, url), same scheme as the forum.
+- Short and mid-length topics read in full (messages truncated); long threads (RFC-5, RFC-3, RFC-9, "MUST match", Fiji, Java S3) phrase-searched only.
+- Notes in `user-stories.tsv` are paraphrased and prefixed `Zulip (<topic>):`; no chat text is committed. `requested_by` uses Zulip display names.

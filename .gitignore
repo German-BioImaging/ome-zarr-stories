@@ -24,3 +24,7 @@ vite.config.ts.timestamp-*
 
 # Temporary file used while saving user-stories.tsv
 *.tmp
+forum-scrape/__pycache__/
+forum-triage.tsv
+issues.json
+zulip-triage.tsv

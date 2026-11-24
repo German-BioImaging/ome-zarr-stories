@@ -34,7 +34,7 @@ Other commands:
 
 ## Story arena
 
-`/arena` shows two stories; pick the one you prefer, or skip. Each vote is appended to `arena-matches.tsv` (`winner, loser, at, class`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Votes made with a user-class filter feed that class's own ranking; votes without one feed the overall ranking. Cards show a story's short version (the first paragraph of `statement`); the rest is under "Full story". Locally, votes go straight into `arena-matches.tsv`; on the public site the arena is a demo (see below).
+`/arena` shows two stories; pick the one you prefer, or skip. Each vote is appended to `arena-matches.tsv` (`winner, loser, at, class`; override with `ARENA_FILE`), and Elo ratings (K=32, start 1500) are replayed from that log. Pairing follows bhl-arena: mostly least-played stories, sometimes top-vs-top or top-vs-underdog. Votes made with a user-class or RFC filter (the **Ranking** menu) feed that class's or RFC's own ranking, comparing only stories tagged with it; votes without one feed the overall ranking. RFC votes store the RFC (e.g. `RFC-5`) in the `class` column. Cards show a story's short version (the first paragraph of `statement`); the rest is under "Full story". Locally, votes go straight into `arena-matches.tsv`; on the public site the arena is a demo (see below).
 
 ### Voting in the arena
 

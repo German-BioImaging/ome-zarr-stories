@@ -21,7 +21,8 @@ export const actions: Actions | undefined = __STATIC__
         const w = byId.get(winner),
           l = byId.get(loser);
         if (!w || !l || winner === loser) return fail(400);
-        if (cls && !(w.user_classes.includes(cls) && l.user_classes.includes(cls)))
+        const key = /^RFC-\d+$/.test(cls) ? "rfcs" : "user_classes";
+        if (cls && !(w[key].includes(cls) && l[key].includes(cls)))
           return fail(400);
         await arena.record(winner, loser, cls);
       },

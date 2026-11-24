@@ -23,6 +23,9 @@
 	});
 	const cls = $derived(param('class') ?? '');
 	const classes = $derived([...new Set(data.stories.flatMap((x) => x.user_classes))].sort());
+	// ponytail: an RFC ranking reuses the "class" slot (RFC-n never clashes with a user class name).
+	const rfcs = $derived([...new Set(data.stories.flatMap((x) => x.rfcs))].sort((a, b) => +a.slice(4) - +b.slice(4)));
+	const isRfc = $derived(/^RFC-\d+$/.test(cls));
 
 	// Static site: votes stay in this browser (localStorage) until sent in by hand, see GUIDE.
 	const KEY = 'arena-votes';
@@ -57,7 +60,7 @@
 		data.stories.filter(
 			(x) =>
 				(status === 'open' ? !isSolved(x.status[version]) : !status || x.status[version] === status) &&
-				(!cls || x.user_classes.includes(cls))
+				(!cls || (isRfc ? x.rfcs : x.user_classes).includes(cls))
 		)
 	);
 	const rated = $derived(ratings(data.stories.map((x) => x.id), matches));
@@ -121,10 +124,15 @@
 			</select></label
 		>
 		<label
-			>User class
+			>Ranking
 			<select name="class" value={cls} onchange={submit}>
-				<option value="">Any</option>
-				{#each classes as c (c)}<option value={c}>{c}</option>{/each}
+				<option value="">Overall</option>
+				<optgroup label="User class">
+					{#each classes as c (c)}<option value={c}>{c}</option>{/each}
+				</optgroup>
+				<optgroup label="Within one RFC">
+					{#each rfcs as r (r)}<option value={r}>{r}</option>{/each}
+				</optgroup>
 			</select></label
 		>
 	</form>
